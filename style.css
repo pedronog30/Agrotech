@@ -165,18 +165,18 @@ header p {
 }
 
 #Temperatura {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: bold;
     color: #333;
-    display: block;
 }
 
 #Descricao-clima {
-    color: #666;
-    font-size: 16px;
-    display: block;
-    margin-bottom: 15px;
+    color: #333;
+    font-size: 22px;
     text-transform: capitalize;
+    width: 100%;
+    margin-top: 5px;
+    margin-left: 80px;
 }
 
 .clima p {
@@ -192,6 +192,10 @@ header p {
 
 .clima-esquerda {
     flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
 }
 
 .clima-direita {
