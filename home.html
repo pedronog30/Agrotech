@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+    <div class="card-logo"> 
+        <i class="fa-solid fa-leaf"></i>
+        <h1>AgroConsulta</h1>
+        <p>informações que cultivam resultado</p>
+    </div> 
+    <nav class="menu">
+        <ul>
+       <li><a href="home.html" class="ativo"><i class="fa-solid fa-house"></i> Início</a></li>
+<li><a href="clima.html"><i class="fa-solid fa-cloud-sun"></i> Clima</a></li>
+<li><a href="plantio.html"><i class="fa-solid fa-seedling"></i> Plantio</a></li>
+<li><a href="colheita"><i class="fa-solid fa-wheat-awn"></i> Colheita</a></li>
+        </ul>
+    </nav>
+    </div>
+    <main>
+        <header>
+            <div>
+            <h2>Olá!</h2>
+            <p>veja as recomendações para a plantação de hoje</p>
+            </div>
+            <span id="localizacao"><i class="fa-solid fa-location-dot"></i> localizando...</span>
+        </header>
+        <section class="clima">
+    <h3><i class="fa-solid fa-cloud-sun"></i> Condições de clima</h3>
+    <div class="clima-conteudo">
+        <div class="clima-esquerda">
+            <span id="clima-icone"></span>
+            <span id="Temperatura">-- C</span>
+            <span id="Descricao-clima">Carregando</span>
+        </div>
+       <div class="clima-direita">
+    <p><i class="fa-solid fa-droplet"></i> Chuva <span id="Chuva">-- %</span></p>
+    <p><i class="fa-solid fa-water"></i> Umidade <span id="Umidade">-- %</span></p>
+    <p><i class="fa-solid fa-wind"></i> Vento <span id="Vento">-- km/h</span></p>
+</div>
+    </div>
+    <div class="previsao-semanal" id="previsao-semanal">
+<!--JS VAI PREENCHER-->
+    </div>
+</section>
+        <div class="cards-bottom">
+        <section class="calendario">
+            <h3><i class="fa-solid fa-calendar-days"></i> Calendário Agrícola</h3>
+                <span id="mes">... Carregando</span>
+                <div id="calendario-conteudo">
+                    <!--JS VAI GERAR A TABELA DO CALENDARIO-->
+                </div>   
+            
+        </section>
+        <section class="alertas">
+            <h3><i class="fa-solid fa-bell"></i> Alertas importantes</h3>
+            <div id="alertas-conteudo">
+                <!--JS VAI GERAR OS ALERTAS COM BASE NO CLIMA-->
+            </div>
+            
+        </section>
+        </div>
+    </main>
+
+    
+
+
+<script src="./script.js"></script>
+</body>
+</html>

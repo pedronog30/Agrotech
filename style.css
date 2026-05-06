@@ -1,0 +1,257 @@
+body {
+    margin: 0;
+    display: flex;
+    background-color: #e8f0e2;
+}
+
+.container {
+    width: 250px;
+    min-height: calc(100vh - 30px);
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0 0 12px 10px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+border-radius: 10px;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    margin-bottom: 15px;
+}
+
+.clima, .calendario, .alertas {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.cards-bottom {
+    display: flex;
+    gap: 20px;
+}
+
+.calendario {
+    flex: 2;
+}
+
+.alertas {
+    flex: 1;
+}
+
+.card h1 {
+    color: #2e7d32;
+    font-size: 24px;
+}
+
+.card p {
+    color: #666;
+    font-size: 14px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.menu a:hover {
+    background-color: #2e7d32;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.card {
+    
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    margin-top: 20px;
+}
+
+
+.menu {
+    margin-top: 30px;
+}
+
+.card-logo {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    margin-top: 20px;
+}
+
+.card-logo i {
+    color: #2e7d32;
+    font-size: 30px;
+}
+
+.card-logo h1 {
+    color: #2e7d32;
+    font-size: 24px;
+    display: inline;
+}
+
+.menu a i {
+    color: #2e7d32;
+    margin-right: 10px;
+}
+
+.menu .ativo {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.menu a:hover i,
+.menu .ativo i {
+    color: #ffffff;
+}
+
+.card-logo p {
+    font-size: 12px;
+    color: #999;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#localizacao {
+    background-color: #ffffff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+#localizacao i {
+    color: #2e7d32;
+}
+
+header h2 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+header p {
+    color: #666;
+    font-size: 14px;
+}
+
+.clima h3, .calendario h3, .alertas h3 {
+    color: #333;
+    font-size: 18px;
+}
+
+.clima h3 i, .calendario h3 i, .alertas h3 i {
+    color: #2e7d32;
+    margin-right: 8px;
+}
+
+#Temperatura {
+    font-size: 48px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+}
+
+#Descricao-clima {
+    color: #666;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+.clima p {
+    color: #555;
+    font-size: 14px;
+}
+
+.clima-conteudo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.clima-esquerda {
+    flex: 1;
+}
+
+.clima-direita {
+    flex: 1;
+    text-align: right;
+    border-left: 1px solid #eee;
+    padding-left: 30px;
+}
+
+.clima-direita i {
+    color: #2e7d32;
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.clima-direita span {
+    font-weight: bold;
+}
+
+.clima-direita p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+#Temperatura {
+    font-size: 56px;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.previsao-semanal {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.previsao-dia {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.dia-nome {
+    font-size: 14px;
+    color: #666;
+    text-transform: capitalize;
+}
+
+.dia-temp {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.previsao-icone i {
+    font-size: 28px !important;
+}
