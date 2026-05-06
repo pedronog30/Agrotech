@@ -53,21 +53,36 @@ navigator.geolocation.getCurrentPosition(function(position) {
             alertasDiv.innerHTML = "";
             let temp = data.main.temp;
             let chuvaValor = data.rain ? data.rain["1h"] : 0;
+            let umidade = data.main.humidity;
+            let vento = data.wind.speed;
+            let descricao = data.weather[0].description.toLowerCase();
 
             if (chuvaValor > 5) {
-                alertasDiv.innerHTML += '<div class="alerta-item"><i class="fa-solid fa-cloud-rain"></i><strong>Previsão de chuva forte</strong><p>Há previsão de chuvas intensas. Fique atento!</p></div>';
+                alertasDiv.innerHTML += '<div class="alerta-item alerta-chuva"><i class="fa-solid fa-cloud-showers-heavy"></i><div><strong>Previsão de chuva forte</strong><p>Há previsão de chuvas intensas. Proteja suas culturas!</p></div></div>';
             }
 
             if (temp > 35) {
-                alertasDiv.innerHTML += '<div class="alerta-item"><i class="fa-solid fa-temperature-high"></i> <strong>Atenção com a temperatura</strong><p>Temperaturas elevadas podem afetar as culturas.</p></div>';
+                alertasDiv.innerHTML += '<div class="alerta-item alerta-calor"><i class="fa-solid fa-temperature-high"></i><div><strong>Atenção com a temperatura</strong><p>Temperaturas elevadas podem afetar o desenvolvimento das culturas.</p></div></div>';
             }
 
             if (temp < 10) {
-                alertasDiv.innerHTML += '<div class="alerta-item"><i class="fa-solid fa-snowflake"></i> <strong>Risco de geada</strong><p>Temperaturas baixas podem danificar as plantações.</p></div>';
+                alertasDiv.innerHTML += '<div class="alerta-item alerta-frio"><i class="fa-solid fa-snowflake"></i><div><strong>Risco de geada</strong><p>Temperaturas baixas podem danificar as plantações.</p></div></div>';
+            }
+
+            if (umidade < 30) {
+                alertasDiv.innerHTML += '<div class="alerta-item alerta-seco"><i class="fa-solid fa-sun-plant-wilt"></i><div><strong>Umidade muito baixa</strong><p>Considere irrigar as plantações. Risco de seca.</p></div></div>';
+            }
+
+            if (vento > 40) {
+                alertasDiv.innerHTML += '<div class="alerta-item alerta-vento"><i class="fa-solid fa-wind"></i><div><strong>Ventos fortes</strong><p>Ventos intensos podem danificar as culturas. Proteja as plantas!</p></div></div>';
+            }
+
+            if (descricao.includes("trovoada") || descricao.includes("tempestade")) {
+                alertasDiv.innerHTML += '<div class="alerta-item alerta-tempestade"><i class="fa-solid fa-cloud-bolt"></i><div><strong>Alerta de tempestade</strong><p>Tempestade prevista. Evite trabalho no campo!</p></div></div>';
             }
 
             if (alertasDiv.innerHTML === "") {
-                alertasDiv.innerHTML = '<div class="alerta-item"><i class="fa-solid fa-check-circle"></i> <strong>Tudo certo!</strong><p>Nenhum alerta no momento.</p></div>';
+                alertasDiv.innerHTML = '<div class="alerta-item alerta-ok"><i class="fa-solid fa-circle-check"></i><div><strong>Tudo certo!</strong><p>Condições climáticas favoráveis para suas culturas.</p></div></div>';
             }
         })
         .catch(error => {
