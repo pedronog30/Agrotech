@@ -301,3 +301,18 @@ header p {
     display: block;
     margin-bottom: 5px;
 }
+
+.clima:hover, .calendario:hover, .alertas:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(46, 125, 50, 0.15);
+    border: 1px solid rgba(46, 125, 50, 0.2);
+}
+
+.clima, .calendario, .alertas {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    transition: all 0.4s ease;
+}
