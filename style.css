@@ -1,7 +1,11 @@
 body {
     margin: 0;
     display: flex;
-    background-color: #e8f0e2;
+    background-image: url('./img/agro.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 .container {
@@ -129,15 +133,20 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+
 }
 
 #localizacao {
-    background-color: #ffffff;
-    padding: 8px 15px;
-    border-radius: 20px;
+    background-color: #f5f5f5;
+    padding: 10px 18px;
+    border-radius: 25px;
     font-size: 14px;
     color: #333;
+    font-weight: 500;
 }
 
 #localizacao i {
@@ -145,13 +154,15 @@ header {
 }
 
 header h2 {
-    color: #333;
-    margin-bottom: 5px;
+    color: #2e7d32;
+    font-size: 28px;
+    margin: 0 0 5px 0;
 }
 
 header p {
-    color: #666;
-    font-size: 14px;
+     color: #666;
+    font-size: 15px;
+    margin: 0;
 }
 
 .clima h3, .calendario h3, .alertas h3 {
@@ -258,4 +269,39 @@ header p {
 
 .previsao-icone i {
     font-size: 28px !important;
+}
+
+#calendario-conteudo table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#calendario-conteudo th {
+    color: #666;
+    font-size: 13px;
+    padding: 8px;
+    text-align: center;
+}
+
+#calendario-conteudo td {
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.hoje {
+    background-color: #2e7d32;
+    color: #ffffff !important;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+#mes {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
 }
