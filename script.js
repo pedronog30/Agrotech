@@ -144,3 +144,45 @@ navigator.geolocation.getCurrentPosition(function(position) {
             console.log("Erro ao buscar previsão: " + error);
         });
 });
+// Calendário Agrícola
+function gerarCalendario() {
+    let agora = new Date();
+    let mes = agora.getMonth();
+    let ano = agora.getFullYear();
+
+    let nomeMes = agora.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+    document.getElementById("mes").textContent = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1);
+
+    let primeiroDia = new Date(ano, mes, 1).getDay();
+    let totalDias = new Date(ano, mes + 1, 0).getDate();
+    let hoje = agora.getDate();
+
+    let tabela = '<table><thead><tr>';
+    let diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+    diasSemana.forEach(dia => {
+        tabela += `<th>${dia}</th>`;
+    });
+    tabela += '</tr></thead><tbody><tr>';
+
+    for (let i = 0; i < primeiroDia; i++) {
+        tabela += '<td></td>';
+    }
+
+    for (let dia = 1; dia <= totalDias; dia++) {
+        if ((dia + primeiroDia - 1) % 7 === 0 && dia !== 1) {
+            tabela += '</tr><tr>';
+        }
+
+        if (dia === hoje) {
+            tabela += `<td class="hoje">${dia}</td>`;
+        } else {
+            tabela += `<td>${dia}</td>`;
+        }
+    }
+
+    tabela += '</tr></tbody></table>';
+    document.getElementById("calendario-conteudo").innerHTML = tabela;
+}
+
+gerarCalendario();
