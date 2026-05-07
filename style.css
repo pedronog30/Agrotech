@@ -1,11 +1,7 @@
 body {
     margin: 0;
     display: flex;
-    background-image: url('./img/agro.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-color: #e8f0e2;
 }
 
 .container {
