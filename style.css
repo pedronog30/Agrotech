@@ -334,3 +334,9 @@ header p {
     transition: all 0.4s ease;
 }
 
+body {
+    margin: 0;
+    display: flex;
+    background-color: #e8f0e2;
+    font-family: 'Inter', sans-serif;
+}
