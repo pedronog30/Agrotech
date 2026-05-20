@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima</title>
+    <link rel="stylesheet" href="clima.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    
+    <!-- 
+    modelo base
+
+    BODY
+ ├── SIDEBAR
+ └── MAIN
+      ├── BANNER
+      ├── GRID TOP
+      ├── PREVISÃO
+      ├── GRÁFICOS
+      ├── MAPA
+      └── CARDS LATERAIS
+
+     -->
+
+    <div class="sidebar">
+        
+    </div>
+
+    <div class="content">
+        <div class="banner"></div>
+        
+        <div class="top-grid"></div>
+
+            <div class="weather-main">
+
+            <h2 class="section-title">Condições atuais</h2>
+
+            <div class="weather-header">
+
+                <div class="weather-left">
+
+                    <div class="weather-icon">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                    </div>
+
+                    <div class="temperature-info">
+
+                        <h1>19°C</h1>
+
+                        <p>Parcialmente nublado</p>
+
+                    </div>
+
+                </div>
+
+                <div class="weather-right">
+
+                    <div class="info-card">
+                        <h3>Umidade</h3>
+                        <p>78%</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Vento</h3>
+                        <p>3.6 km/h</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Pressão</h3>
+                        <p>1018 hPa</p>
+                    </div>
+
+                </div>
+
+            </div> 
+
+        </div>
+
+            <div class="alerts"></div>
+
+    </div>
+
+    <div class="forecast-section">
+        <h2 class="section-title">Previsão por hora</h2>
+        
+        <div class="forecast-grid">
+
+    <div class="forecast-card">
+        <h4>00h</h4>
+        <i class="fa-solid fa-cloud"></i>
+        <p>17°C</p>
+    </div>
+
+    <div class="forecast-card">
+        <h4>03h</h4>
+        <i class="fa-solid fa-moon"></i>
+        <p>16°C</p>
+    </div>
+
+    <div class="forecast-card">
+        <h4>06h</h4>
+        <i class="fa-solid fa-cloud-rain"></i>
+        <p>18°C</p>
+    </div>
+
+    <div class="forecast-card">
+        <h4>09h</h4>
+        <i class="fa-solid fa-cloud-sun-rain"></i>
+        <p>20°C</p>
+    </div>
+
+</div>
+
+    </div>
+
+
+
+</body>
+</html>
