@@ -6,14 +6,73 @@
 
 body{
     display: flex;
-    background-color: #eef3ea;
+    background-color: #f4f7f2;
     font-family: Arial, Helvetica, sans-serif;
+    gap: 24px;
+    padding: 20px;
 }
 
 .sidebar{
     width: 260px;
-    height: 100vh;
+    min-height: calc(100vh - 40px);
     background-color: white;
+    border-radius: 24px;
+    padding: 30px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.logo-area{
+    padding-bottom: 30px;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 30px;
+}
+
+.logo-area i{
+    font-size: 28px;
+    color: #2f7d32;
+    margin-bottom: 10px;
+}
+
+.logo-area h1{
+    font-size: 20px;
+    color: #2f7d32;
+}
+.logo-area p{
+    font-size: 13px;
+    color: #777;
+    margin-top: 8px;
+}
+
+/* SIDEBAR */
+.sidebar-menu ul{
+    list-style: none;
+}
+
+.sidebar-menu li{
+    margin-bottom: 10px;
+}
+
+.sidebar-menu a{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: #2f2f2f;
+    padding: 14px 16px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.2s;
+    letter-spacing: 0.2px;
+}
+
+.sidebar-menu a:hover{
+    background-color: #edf5ed;
+}
+
+.sidebar-menu .active a{
+    background-color: #2f7d32;
+    color: white;
 }
 
 .content{
@@ -21,11 +80,31 @@ body{
     padding: 20px;
 }
 
+/* BANNER */
 .banner{
     width: 100%;
-    height: 120px;
-    background-color: white;
-    border-radius: 20px;
+    height: 130px;
+    border-radius: 24px;
+    background-image: url(.//img/Gemini_Generated_Image_njj6wmnjj6wmnjj6.png);
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner-overlay{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+    90deg,
+    rgba(0,0,0,0.45),
+    rgba(0,0,0,0.15)
+    );
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 26px 32px;
 }
 
 .top-grid{
@@ -42,11 +121,13 @@ body{
 }
 
 .section-title{
-    font-size: 22px;
-    margin-bottom: 25px;
-    color: #2e5e2c;
+    font-size: 24px;
+    font-weight: 700;
+    color: #244222;
+    margin-bottom: 24px;
 }
 
+/* WEATHER */
 .weather-main{
     background-color: white;
     border-radius: 20px;
@@ -93,6 +174,7 @@ body{
     min-width: 120px;
 }
 
+/* FORECAST */
 .forecast-section{
     background-color: white;
     border-radius: 20px;
@@ -101,9 +183,11 @@ body{
 }
 
 .forecast-grid{
-    display: flex;
+    display: grid;
     justify-content: space-between;
-    margin-top: 30px;
+    margin-top: 25px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
 }
 
 .forecast-card{
@@ -111,18 +195,253 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 15px;
-}
-
-.forecast-card i{
-    font-size: 35px;
+    background-color: #f8faf7;
+    border-radius: 18px;
+    padding: 20px 10px;
+    text-align: center;
+    transition: 0.2s;
     color: #4d8b46;
 }
 
+.forecast-card:hover{
+    transform: translateY(-3px);
+}
+
 .forecast-card h4{
-    color: #555;
+    color: #7b8777;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .forecast-card p{
     font-weight: bold;
     font-size: 18px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 10px;
+    color: #2e5e2c;
+}
+
+/* MAP */
+.map-section{
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 20px;
+}
+
+.map-container{
+    position: relative;
+    margin-top: 25px;
+    height: 320px;
+    border-radius: 22px;
+    overflow: hidden;
+    background-image: url(.//img/ChatGPT\ Image\ 21\ de\ mai.\ de\ 2026\,\ 17_10_25.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.map-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.map-subtitle{
+    color: #7b8777;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.map-status{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #edf5ed;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2e5e2c;
+}
+
+.map-controls{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.map-controls button{
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 14px;
+    background-color: white;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.map-legend{
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    background-color: rgba(255,255,255,0.95);
+    border-radius: 16px;
+    padding: 14px;
+}
+
+.legend-item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.city{
+    position: absolute;
+    background-color: rgba(255,255,255,0.92);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.city-1{
+    top: 35%;
+    left: 45%;
+}
+
+.city-2{
+    top: 25%;
+    left: 30%;
+}
+
+.city-3{
+    top: 40%;
+    left: 60%;
+}
+
+.legend{
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.green{
+    background-color: #69b96d;
+}
+
+.yellow{
+    background-color: #f0c94b;
+}
+
+.red{
+    background-color: #e25d5d;
+}
+
+.map-status span{
+    width: 10px;
+    height: 10px;
+    background-color: #4d8b46;
+    border-radius: 50%;
+}
+
+.card{
+    background-color: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.temperature-section{
+    margin-top: 20px;
+}
+
+.chart-area{
+    position: relative;
+    height: 250px;
+    background-color: #f8faf7;
+    border-radius: 15px;
+    margin-top: 20px;
+    overflow: hidden;
+    background: linear-gradient(
+    to top,
+    #dff0dd,
+    #f8faf7);
+}
+
+.temp-point{
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #2e7d32;
+    border-radius: 50%;
+}
+
+.temp-point span{
+    position: absolute;
+    top: -30px;
+    left: -5px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.chart-line{
+    position: absolute;
+    width: 80%;
+    height: 3px;
+    background-color: #4d8b46;
+    border-radius: 20px;
+    left: 10%;
+    top: 50%;
+    transform: rotate(-8deg);   
+    opacity: 0.8;
+}
+
+.chart-hours{
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #7a8577;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+/* efeitos */
+
+.card,
+.forecast-card,
+.info-card,
+.map-controls button{
+    transition: all 0.2s ease;
+}
+
+.card:hover,
+.info-card:hover{
+    transform: translateY(-2px);
+}
+
+.weather-main,
+.alerts,
+.forecast-section,
+.map-section{
+    background-color: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+}
+
+.forecast-section,
+.temperature-section,
+.map-section{
+    margin-top: 24px;
 }
