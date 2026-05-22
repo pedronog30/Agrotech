@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./plantio.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Plantio - AgroConsulta</title>
+</head>
+
+<body>
+
+    <!-- SIDEBAR (lado esquerdo, do chão ao teto) -->
+    <aside class="sidebar">   
+        <div class="card-logo"> 
+            <i class="fa-solid fa-leaf"></i>
+            <h1>AgroConsulta</h1>
+            <p>informações que cultivam resultado</p>
+        </div> 
+
+        <nav class="menu">
+            <ul>
+                <li><a href="home.html"><i class="fa-solid fa-house"></i> Início</a></li>
+                <li><a href="clima.html"><i class="fa-solid fa-cloud-sun"></i> Clima</a></li>
+                <li><a href="plantio.html" class="ativo"><i class="fa-solid fa-seedling"></i> Plantio</a></li>
+                <li><a href="colheita.html"><i class="fa-solid fa-wheat-awn"></i> Colheita</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- MAIN (lado direito: header + quiz + resultado) -->
+    <main>
+
+        <!-- HEADER NO TOPO -->
+        <header class="barra_topo">
+            <h2>PLANTAÇÃO</h2>
+            <p>Aqui te ajudaremos a criar uma plantação sustentável.</p>
+        </header>
+
+        <!-- QUIZ -->
+        <section class="quiz">
+            <h2>Vamos descobrir a melhor opção para sua plantação</h2>
+
+            <div class="opcoes-quiz">
+
+                <div class="categoria">
+                    <h3><i class="fa-solid fa-temperature-half"></i> Clima</h3>
+
+                    <button onclick="selecionar('clima', 'quente', this)">Quente</button>
+                    <button onclick="selecionar('clima', 'moderado', this)">Moderado</button>
+                    <button onclick="selecionar('clima', 'frio', this)">Frio</button>
+                </div>
+
+                <div class="categoria">
+                    <h3><i class="fa-solid fa-droplet"></i> Umidade</h3>
+
+                    <button onclick="selecionar('umidade', 'seco', this)">Seco</button>
+                    <button onclick="selecionar('umidade', 'umido', this)">Úmido</button>
+                </div>
+
+                <div class="categoria">
+                    <h3><i class="fa-solid fa-calendar"></i> Estação</h3>
+                    
+                    <button onclick="selecionar('estacao', 'verao', this)">Verão</button>
+                    <button onclick="selecionar('estacao', 'outono', this)">Outono</button>
+                    <button onclick="selecionar('estacao', 'inverno', this)">Inverno</button>
+                    <button onclick="selecionar('estacao', 'primavera', this)">Primavera</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- RESULTADO -->
+        <section class="resultado" id="resultado">
+            <p>🌱 Selecione clima, umidade e estação para ver a melhor opção</p>
+        </section>
+
+    </main>
+
+    <!-- SCRIPT NO FINAL -->
+    <script src="plantio.js"></script>
+
+</body>
+</html>
