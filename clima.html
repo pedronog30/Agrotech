@@ -3,12 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clima</title>
+    <title>Clima</title>
+    <link rel="stylesheet" href="clima.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <p>TESTE commit</p>
+    
+    <!-- 
+    modelo base
+
+    BODY
+ ├── SIDEBAR
+ └── MAIN
+      ├── BANNER
+      ├── GRID TOP
+      ├── PREVISÃO
+      ├── GRÁFICOS
+      ├── MAPA
+      └── CARDS LATERAIS
+
+     -->
+
+    <div class="sidebar">
+
+    <div class="logo-area">
+        <i class="fa-solid fa-leaf"></i>
+        <h1>AgroConsulta</h1>
+        <p>informações que cultivam resultado</p>
+    </div>
+
+    <nav class="sidebar-menu">
+        <ul>
+
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Início</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-cloud-sun"></i>
+                    <span>Clima</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-seedling"></i>
+                    <span>Plantio</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                    <span>Colheita</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+</div>
+    
+    <div class="content">
+
+        <div class="banner">
+            <div class="banner-overlay">
+                <div class="banner-text">
+                    <h1"">Clima para produzir melhor 🌦️</h1>
+                    <p>Acompanhe as condições climáticas e tome decisões mais assertivas.</p>
+                </div>
+                <div class="location-badge">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span">Vila Galvão, SP</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="top-grid">
+
+        <div class="weather-main">
+            <h2 class="section-title">Condições atuais</h2>
+
+
+            <div class="weather-header">
+
+                <div class="weather-left">
+                    
+                    <div class="weather-icon">
+                        <i class="fa-solid fa-cloud-sun"></i>
+                    </div>
+                    <div class="temperature-info">
+                        <h1>19°C</h1>
+                        <p>Parcialmente nublado</p>
+                    </div>
+                </div>
+                <div class="weather-right">
+                    <div class="info-card">
+                        <h3>Umidade</h3>
+                        <p>78%</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Vento</h3>
+                        <p>3.6 km/h</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Pressão</h3>
+                        <p>1018 hPa</p>
+                    </div>
+                </div>
+            </div> 
+        </div>
+
+        <div class="alerts">
+            <h2 class="section-title">Alertas Climáticos</h2>
+            <div class="alert-card">
+                <h3>🌧️ Chuva intensa</h3>
+                <p>
+                    Possibilidade de chuva forte nas próximas 24 horas.
+                </p>
+            </div>
+            <div class="alert-card">
+                <h3>💨 Ventos moderados</h3>
+                <p>
+                    Rajadas de até 18 km/h previstas para o período da tarde.
+                </p>
+            </div>
+            <div class="alert-card">
+                <h3>☀️ Baixa umidade</h3>
+                <p>
+                    Umidade abaixo de 35% prevista para amanhã.
+                </p>
+            </div>
+        </div>
+        </div>
+
+        <div class="forecast-section">
+            <h2 class="section-title">Previsão por hora</h2>
+            
+            <div class="forecast-grid">
+
+                <div class="forecast-card">
+                    <h4>00h</h4>
+                    <i class="fa-solid fa-cloud"></i>
+                    <p>17°C</p>
+                </div>
+
+                <div class="forecast-card">
+                    <h4>03h</h4>
+                    <i class="fa-solid fa-moon"></i>
+                    <p>16°C</p>
+                </div>
+
+                <div class="forecast-card">
+                    <h4>06h</h4>
+                    <i class="fa-solid fa-cloud-rain"></i>
+                    <p>18°C</p>
+                </div>
+
+                <div class="forecast-card">
+                    <h4>09h</h4>
+                    <i class="fa-solid fa-cloud-sun-rain"></i>
+                    <p>20°C</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="temperature-section card">
+            <h2 class="section-title">Temperatura ao longo do dia</h2>
+            <div class="chart-area">
+                <div class="chart-line"></div>
+                <div class="temp-point" style="left: 5%; bottom: 40%;">
+                    <span>15°</span>
+                </div>
+                <div class="temp-point" style="left: 25%; bottom: 35%;">
+                    <span>14°</span>
+                </div>
+                <div class="temp-point" style="left: 45%; bottom: 50%;">
+                    <span>19°</span>
+                </div>
+                <div class="temp-point" style="left: 65%; bottom: 65%;">
+                    <span>22°</span>
+                </div>
+                <div class="temp-point" style="left: 85%; bottom: 45%;">
+                    <span>16°</span>
+                </div>
+                <div class="chart-hours">
+                    <span>00h</span>
+                    <span>03h</span>
+                    <span>06h</span>
+                    <span>09h</span>
+                    <span>12h</span>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="map-section card">
+            <div class="map-top">
+                <div>
+                    <h2 class="section-title">
+                        Radar climático
+                    </h2>
+                    <p class="map-subtitle">
+                        Monitoramento visual das condições climáticas
+                    </p>
+                </div>
+                <div class="map-status">
+                    <span></span>
+                    Atualizado agora
+                </div>
+            </div>
+            <div class="map-container">
+                <div class="map-controls">
+                    <button>+</button>
+                    <button>-</button>
+                </div>
+                <div class="map-legend">
+                    <div class="legend-item">
+                        <span class="legend green"></span>
+                        Fraco
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend yellow"></span>
+                        Moderado
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend red"></span>
+                        Forte
+                    </div>
+                </div>
+                <div class="city city-1">São Paulo</div>
+                <div class="city city-2">Campinas</div>
+                <div class="city city-3">Guarulhos</div>
+            </div>
+        </div>
 
 
 
+        
+        
+        
+        
+        
+    </div>
 </body>
 </html>
