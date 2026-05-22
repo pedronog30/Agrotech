@@ -139,6 +139,7 @@ header {
     position: relative;
 
 }
+
 header::before {
     content: '';
     position: absolute;
@@ -149,6 +150,7 @@ header::before {
     background: rgba(255, 255, 255, 0.337);
     border-radius: 10px;
 }
+
 header * {
     position: relative;
     z-index: 1;
@@ -340,4 +342,107 @@ body {
     display: flex;
     background-color: #e8f0e2;
     font-family: 'Inter', sans-serif;
+}
+
+.header-colheita {
+    padding: 40px 30px;
+    position: relative;
+    
+}
+
+.container-colheita {
+    margin: 15px 5px 15px 15px;
+}
+
+.header-colheita {
+    background-image: url('./img/img header colheita.png');
+
+}
+
+.header-colheita::before {
+   content: "";
+
+   position: absolute;
+   inset: 0;
+
+   background: linear-gradient(
+      90deg,
+      rgba(0, 40, 0, 0.85) 0%,
+      rgba(0, 40, 0, 0.55) 35%,
+      rgba(0, 0, 0, 0) 70%
+   );
+}
+
+.header-colheita {
+    h2 {
+        color: #ffffff;
+    }
+   
+    .fa-solid.fa-wheat-awn {
+        color: #c29912;
+    }
+   
+    p {
+        font-size: 14px;
+        margin-top: 1px;
+    }
+}
+
+.header-status-box {
+    display: flex;
+    gap: 20px;
+    padding: 15px 20px 15px 20px;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    bottom: 10px;
+    right: 50px;
+    line-height: 1.4;
+    
+}
+
+.status-badge {
+    background: #207737b4;
+    color: #ffffff;
+    padding: 4px 13px;
+    border-radius: 50px;
+    display: inline-block;
+    font-weight: 400;
+    margin: 3px 0px;
+    font-size: 16px;
+}
+
+.barra {
+    width: 150px;
+    height: 12px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.barra-fill {
+    width: 68%;
+    height: 100%;
+    background: #34c759;
+    border-radius: 999px;
+    
+}
+
+.header-status-box p {
+    font-size: 13px;
+}
+
+.header-status-box h2 {
+    margin: 5px 0 0 0;
+    line-height: 1;
+}
+
+.progresso-coluna {
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  padding-left: 20px;
 }
