@@ -36,30 +36,37 @@
         <ul>
 
             <li class="active">
-                <a href="#">
+                <a href="./home.html">
                     <i class="fa-solid fa-house"></i>
                     <span>Início</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="./clima.html">
                     <i class="fa-solid fa-cloud-sun"></i>
                     <span>Clima</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="plantio.html">
                     <i class="fa-solid fa-seedling"></i>
                     <span>Plantio</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="./plantio.html">
                     <i class="fa-solid fa-wheat-awn"></i>
                     <span>Colheita</span>
+                </a>
+            </li>
+
+           <li>
+                <a href="#">
+                    <i class="fa-solid fa-headset"></i>
+                    <span>Fale-Conosco</span>
                 </a>
             </li>
 
@@ -73,12 +80,12 @@
         <div class="banner">
             <div class="banner-overlay">
                 <div class="banner-text">
-                    <h1"">Clima para produzir melhor 🌦️</h1>
+                    <h1>Clima para produzir melhor 🌦️</h1>
                     <p>Acompanhe as condições climáticas e tome decisões mais assertivas.</p>
                 </div>
                 <div class="location-badge">
                     <i class="fa-solid fa-location-dot"></i>
-                    <span">Vila Galvão, SP</span>
+                    <span">Sua Localização, Cidade</span>
                 </div>
             </div>
         </div>
@@ -90,32 +97,49 @@
 
 
             <div class="weather-header">
-
                 <div class="weather-left">
-                    
                     <div class="weather-icon">
                         <i class="fa-solid fa-cloud-sun"></i>
                     </div>
                     <div class="temperature-info">
                         <h1>19°C</h1>
                         <p>Parcialmente nublado</p>
+                        <span>Sensação térmica 18°C</span>
                     </div>
                 </div>
+
                 <div class="weather-right">
                     <div class="info-card">
-                        <h3>Umidade</h3>
-                        <p>78%</p>
+                        <i class="fa-solid fa-droplet"></i>
+                        <div>
+                            <h3>Umidade</h3>
+                            <p>78%</p>
+                        </div>
                     </div>
                     <div class="info-card">
-                        <h3>Vento</h3>
-                        <p>3.6 km/h</p>
+                        <i class="fa-solid fa-wind"></i>
+                        <div>
+                            <h3>Vento</h3>
+                            <p>3.6 km/h</p>
+                        </div>
                     </div>
                     <div class="info-card">
-                        <h3>Pressão</h3>
-                        <p>1018 hPa</p>
+                        <i class="fa-solid fa-gauge"></i>
+                        <div>
+                            <h3>Pressão</h3>
+                            <p>1018 hPa</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fa-solid fa-eye"></i>
+                        <div>
+                            <h3>Visibilidade</h3>
+                            <p>10 km</p>
+                        </div>
                     </div>
                 </div>
-            </div> 
+
+            </div>
         </div>
 
         <div class="alerts">
@@ -146,31 +170,126 @@
             
             <div class="forecast-grid">
 
-                <div class="forecast-card">
-                    <h4>00h</h4>
-                    <i class="fa-solid fa-cloud"></i>
-                    <p>17°C</p>
+             <div class="forecast-card">
+                <h4>00h</h4>
+                <i class="fa-solid fa-cloud"></i>
+                <p>17°C</p>
+
+                <div class="forecast-extra">
+                    <span><i class="fa-solid fa-cloud-rain"></i> 10%</span>
+                    <small>0 mm</small>
+                </div>
+            </div>
+
+            <div class="forecast-card">
+                <h4>03h</h4>
+                <i class="fa-solid fa-moon"></i>
+                <p>16°C</p>
+
+                <div class="forecast-extra">
+                    <span><i class="fa-solid fa-cloud-rain"></i> 10%</span>
+                    <small>0 mm</small>
+                </div>
+            </div>
+
+            <div class="forecast-card">
+                <h4>06h</h4>
+                <i class="fa-solid fa-cloud-rain"></i>
+                <p>18°C</p>
+
+                <div class="forecast-extra">
+                    <span><i class="fa-solid fa-cloud-rain"></i> 20%</span>
+                    <small>0 mm</small>
+                </div>
+            </div>
+
+            <div class="forecast-card">
+                <h4>09h</h4>
+                <i class="fa-solid fa-cloud-sun-rain"></i>
+                <p>20°C</p>
+
+                <div class="forecast-extra">
+                    <span><i class="fa-solid fa-cloud-rain"></i> 20%</span>
+                    <small>0 mm</small>
+                </div>
+            </div>
+
+            <div class="forecast-card">
+                <h4>12h</h4>
+                <i class="fa-solid fa-sun"></i>
+                <p>21°C</p>
+
+                <div class="forecast-extra">
+                    <span><i class="fa-solid fa-cloud-rain"></i> 10%</span>
+                    <small>0 mm</small>
+                </div>
+            </div>
+
+            <div class="forecast-card">
+                <h4>15h</h4>
+                <i class="fa-solid fa-cloud-sun"></i>
+                <p>22°C</p>
+
+                <div class="forecast-extra">
+                    <span><i class="fa-solid fa-cloud-rain"></i> 20%</span>
+                    <small>0.2 mm</small>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="mini-grid">
+
+            <div class="mini-card">
+                <div class="mini-icon">
+                    <i class="fa-solid fa-sun"></i>
                 </div>
 
-                <div class="forecast-card">
-                    <h4>03h</h4>
-                    <i class="fa-solid fa-moon"></i>
-                    <p>16°C</p>
+                <div class="mini-info">
+                    <span>Índice UV</span>
+                    <h3>Moderado</h3>
+                    <p>Nível 5</p>
+                </div>
+            </div>
+
+            <div class="mini-card">
+                <div class="mini-icon">
+                    <i class="fa-solid fa-wind"></i>
                 </div>
 
-                <div class="forecast-card">
-                    <h4>06h</h4>
-                    <i class="fa-solid fa-cloud-rain"></i>
-                    <p>18°C</p>
+                <div class="mini-info">
+                    <span>Qualidade do ar</span>
+                    <h3>Boa</h3>
+                    <p>Sem riscos</p>
+                </div>
+            </div>
+
+            <div class="mini-card">
+                <div class="mini-icon">
+                    <i class="fa-solid fa-sun-plant-wilt"></i>
                 </div>
 
-                <div class="forecast-card">
-                    <h4>09h</h4>
-                    <i class="fa-solid fa-cloud-sun-rain"></i>
-                    <p>20°C</p>
+                <div class="mini-info">
+                    <span>Nascer do sol</span>
+                    <h3>06:14</h3>
+                    <p>Pôr do sol 17:42</p>
+                </div>
+            </div>
+
+            <div class="mini-card">
+                <div class="mini-icon">
+                    <i class="fa-solid fa-temperature-half"></i>
+                </div>
+
+                <div class="mini-info">
+                    <span>Sensação</span>
+                    <h3>21°C</h3>
+                    <p>Clima agradável</p>
                 </div>
             </div>
         </div>
+
+        <div class="bottom-grid">
 
         <div class="temperature-section card">
             <h2 class="section-title">Temperatura ao longo do dia</h2>
@@ -242,7 +361,7 @@
             </div>
         </div>
 
-
+        </div>
 
         
         
