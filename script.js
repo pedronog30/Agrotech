@@ -84,6 +84,94 @@ navigator.geolocation.getCurrentPosition(function(position) {
             if (alertasDiv.innerHTML === "") {
                 alertasDiv.innerHTML = '<div class="alerta-item alerta-ok"><i class="fa-solid fa-circle-check"></i><div><strong>Tudo certo!</strong><p>Condições climáticas favoráveis para suas culturas.</p></div></div>';
             }
+
+            // Recomendações baseadas no clima
+            function gerarRecomendacoes(temp, umidade, chuvaValor) {
+                let plantarDiv = document.querySelector(".quando-plantar");
+                let colherDiv = document.querySelector(".quando-colher");
+
+                // --- QUANDO PLANTAR ---
+                let recomendacaoPlantio = "";
+
+                if (temp >= 18 && temp <= 30 && umidade >= 50 && chuvaValor <= 5) {
+                    recomendacaoPlantio += `
+                        <div class="rec-card rec-favoravel">
+                            <i class="fa-solid fa-seedling"></i>
+                            <div>
+                                <strong>Ótimo para plantar Milho!</strong>
+                                <p>Temperatura (${Math.round(temp)}°C) e umidade (${umidade}%) estão ideais.</p>
+                            </div>
+                        </div>`;
+                }
+
+                if (temp >= 18 && temp <= 28 && umidade >= 50 && umidade <= 80 && chuvaValor <= 5) {
+                    recomendacaoPlantio += `
+                        <div class="rec-card rec-favoravel">
+                            <i class="fa-solid fa-seedling"></i>
+                            <div>
+                                <strong>Bom para plantar Feijão!</strong>
+                                <p>Umidade (${umidade}%) dentro do ideal para o feijão.</p>
+                            </div>
+                        </div>`;
+                }
+
+                if (recomendacaoPlantio === "" && chuvaValor > 5) {
+                    recomendacaoPlantio = `
+                        <div class="rec-card rec-atencao">
+                            <i class="fa-solid fa-cloud-rain"></i>
+                            <div>
+                                <strong>Aguarde a chuva passar</strong>
+                                <p>Chuva intensa não é ideal para o plantio agora.</p>
+                            </div>
+                        </div>`;
+                } else if (recomendacaoPlantio === "") {
+                    recomendacaoPlantio = `
+                        <div class="rec-card rec-desfavoravel">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <div>
+                                <strong>Condições desfavoráveis</strong>
+                                <p>Temperatura ou umidade fora do ideal para plantio.</p>
+                            </div>
+                        </div>`;
+                }
+
+                // --- QUANDO COLHER ---
+                let recomendacaoColheita = "";
+
+                if (temp >= 25 && umidade < 60 && chuvaValor === 0) {
+                    recomendacaoColheita = `
+                        <div class="rec-card rec-favoravel">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                            <div>
+                                <strong>Ótimo momento para colher Feijão!</strong>
+                                <p>Tempo seco e quente favorece a colheita.</p>
+                            </div>
+                        </div>`;
+                } else if (chuvaValor > 0) {
+                    recomendacaoColheita = `
+                        <div class="rec-card rec-atencao">
+                            <i class="fa-solid fa-cloud-rain"></i>
+                            <div>
+                                <strong>Evite colher com chuva</strong>
+                                <p>A umidade pode danificar os grãos colhidos.</p>
+                            </div>
+                        </div>`;
+                } else {
+                    recomendacaoColheita = `
+                        <div class="rec-card rec-neutro">
+                            <i class="fa-solid fa-clock"></i>
+                            <div>
+                                <strong>Aguarde o momento certo</strong>
+                                <p>Condições ainda não ideais para a colheita.</p>
+                            </div>
+                        </div>`;
+                }
+
+                plantarDiv.innerHTML = recomendacaoPlantio;
+                colherDiv.innerHTML = recomendacaoColheita;
+            }
+
+            gerarRecomendacoes(temp, umidade, chuvaValor);
         })
         .catch(error => {
             console.log("Erro ao buscar clima: " + error);
@@ -99,12 +187,17 @@ navigator.geolocation.getCurrentPosition(function(position) {
             previsaoDiv.innerHTML = "";
 
             let diasDados = {};
+            let diasCondicao = {};
             let hoje = new Date().getDate();
 
             forecast.list.forEach(item => {
                 let data = new Date(item.dt * 1000);
                 let dia = data.getDate();
+                let tempDia = item.main.temp;
+                let umidadeDia = item.main.humidity;
+                let chuvaDia = item.rain ? item.rain["3h"] : 0;
 
+                // Monta previsão semanal
                 if (dia !== hoje) {
                     if (!diasDados[dia]) {
                         diasDados[dia] = {
@@ -122,8 +215,18 @@ navigator.geolocation.getCurrentPosition(function(position) {
                         }
                     }
                 }
+
+                // Define condição do dia para o calendário (prioriza "plantar")
+                if (!diasCondicao[dia]) {
+                    if (tempDia >= 18 && tempDia <= 30 && umidadeDia >= 50 && chuvaDia <= 5) {
+                        diasCondicao[dia] = "plantar";
+                    } else if (tempDia >= 25 && umidadeDia < 60 && chuvaDia === 0) {
+                        diasCondicao[dia] = "colher";
+                    }
+                }
             });
 
+            // Cards de previsão semanal
             let contador = 0;
             for (let dia in diasDados) {
                 if (contador >= 5) break;
@@ -139,13 +242,17 @@ navigator.geolocation.getCurrentPosition(function(position) {
                 `;
                 contador++;
             }
+
+            // Gera calendário com as condições dos dias
+            gerarCalendario(diasCondicao);
         })
         .catch(error => {
             console.log("Erro ao buscar previsão: " + error);
         });
 });
+
 // Calendário Agrícola
-function gerarCalendario() {
+function gerarCalendario(diasCondicao = {}) {
     let agora = new Date();
     let mes = agora.getMonth();
     let ano = agora.getFullYear();
@@ -176,6 +283,10 @@ function gerarCalendario() {
 
         if (dia === hoje) {
             tabela += `<td class="hoje">${dia}</td>`;
+        } else if (diasCondicao[dia] === "plantar") {
+            tabela += `<td class="dia-plantar">${dia}</td>`;
+        } else if (diasCondicao[dia] === "colher") {
+            tabela += `<td class="dia-colher">${dia}</td>`;
         } else {
             tabela += `<td>${dia}</td>`;
         }

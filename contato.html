@@ -1,49 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="./style.css">
+    <title>AgroConsulta - Contato</title>
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <body>
     <div class="container">
-    <div class="card-logo"> 
-        <i class="fa-solid fa-leaf"></i>
-        <h1>AgroConsulta</h1>
-        <p>informações que cultivam resultado</p>
-    </div> 
-    <nav class="menu">
-        <ul>
-       <li><a href="home.html" class="ativo"><i class="fa-solid fa-house"></i> Início</a></li>
-<li><a href="clima.html"><i class="fa-solid fa-cloud-sun"></i> Clima</a></li>
-<li><a href="plantio.html"><i class="fa-solid fa-seedling"></i> Plantio</a></li>
-<li><a href="colheita.html"><i class="fa-solid fa-wheat-awn"></i> Colheita</a></li>
-<li><a href="contato.html"><i class="fa-solid fa-envelope"></i> Contato</a></li>
-        </ul>
-    </nav>
+        <div class="card-logo">
+            <i class="fa-solid fa-leaf"></i>
+            <h1>AgroConsulta</h1>
+            <p>informações que cultivam resultado</p>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="home.html"><i class="fa-solid fa-house"></i> Início</a></li>
+                <li><a href="clima.html"><i class="fa-solid fa-cloud-sun"></i> Clima</a></li>
+                <li><a href="plantio.html"><i class="fa-solid fa-seedling"></i> Plantio</a></li>
+                <li><a href="colheita.html"><i class="fa-solid fa-wheat-awn"></i> Colheita</a></li>
+                <li><a href="contato.html" class="ativo"><i class="fa-solid fa-envelope"></i> Contato</a></li>
+            </ul>
+        </nav>
     </div>
+
     <main>
         <section class="clima">
-            <h3><i class="fa-solid fa-envelope"></i> Contate-Nos</h3>
-            <p>Tem dúvidas ou sugestões? Envie sua mensagem.</p>
- 
-            <input type="text" id="nome" class="campo" placeholder="Digite seu nome">
-            <input type="email" id="email" class="campo" placeholder="Digite seu e-mail">
-            <textarea id="mensagem" class="campo" rows="5" placeholder="Escreva sua mensagem"></textarea>
- 
-            <button class="btn-enviar" onclick="enviarFormulario()">Enviar</button>
- 
-            <p id="mensagem-sucesso" class="sucesso"><i class="fa-solid fa-circle-check"></i> Mensagem enviada com sucesso!</p>
+            <h3><i class="fa-solid fa-envelope"></i> Fale Conosco</h3>
+            <p>Tem dúvidas ou sugestões? Envie sua mensagem e retornaremos em breve.</p>
+
+            <label for="nome" class="label-campo">Nome Completo</label>
+            <input type="text" id="nome" class="campo" placeholder="Ex: João Silva">
+            <span class="erro-msg" id="erro-nome"></span>
+
+            <label for="email" class="label-campo">E-mail</label>
+            <input type="email" id="email" class="campo" placeholder="Ex: joao@email.com">
+            <span class="erro-msg" id="erro-email"></span>
+
+            <label for="mensagem" class="label-campo">Mensagem</label>
+            <textarea id="mensagem" class="campo" rows="5" placeholder="Escreva sua mensagem aqui..."></textarea>
+            <span class="erro-msg" id="erro-mensagem"></span>
+            <span id="contador" style="font-size: 12px; color: #999; display: block; margin-bottom: 15px;">0/500 caracteres</span>
+
+            <button class="btn-enviar" onclick="enviarFormulario()">
+                <i class="fa-solid fa-paper-plane"></i> Enviar mensagem
+            </button>
+
+            <p id="mensagem-sucesso"><i class="fa-solid fa-circle-check"></i> Mensagem enviada com sucesso!</p>
         </section>
     </main>
 
-
-    </main>
-
-
-     <script src="./formulario.js"></script>
+    <script src="./formulario.js"></script>
 </body>
 </html>

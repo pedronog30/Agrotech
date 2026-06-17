@@ -789,3 +789,137 @@ body{
     padding: 10px 15px;
     border-radius: 8px;
 }
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .sidebar {
+        width: auto;
+        min-height: auto;
+        padding: 15px;
+    }
+
+    .logo-area {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    .sidebar-menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sidebar-menu li {
+        margin-bottom: 0;
+    }
+
+    .sidebar-menu a {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .banner-overlay {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    .banner {
+        height: auto;
+        min-height: 170px;
+    }
+
+    .banner-text h1 {
+        font-size: 28px;
+    }
+
+    .banner-text p {
+        font-size: 15px;
+    }
+
+    .top-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .weather-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .weather-right {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .forecast-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .forecast-card {
+        border-right: none;
+        border-bottom: 1px solid #edf0eb;
+    }
+
+    .mini-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .map-legend {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .map-container {
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    .city {
+        position: static;
+        display: inline-block;
+        margin: 4px;
+    }
+}
+
+@media (max-width: 600px) {
+    .forecast-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mini-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .weather-right {
+        grid-template-columns: 1fr;
+    }
+
+    .temperature-info h1 {
+        font-size: 52px;
+    }
+
+    .weather-icon {
+        font-size: 60px;
+    }
+
+    .location-badge {
+        font-size: 13px;
+        padding: 10px 16px;
+    }
+}

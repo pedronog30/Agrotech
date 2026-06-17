@@ -199,3 +199,78 @@ main {
     color: #3B6D11;
     font-size: 15px;
 }
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: auto;
+        min-height: auto;
+        margin: 12px;
+    }
+
+    .card-logo {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+    }
+
+    .menu ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .menu ul li {
+        margin-bottom: 0;
+    }
+
+    .menu ul li a {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    main {
+        padding: 12px;
+    }
+
+    .barra_topo {
+        padding: 20px 25px;
+    }
+
+    .barra_topo h2 {
+        font-size: 22px;
+    }
+
+    .opcoes-quiz {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .resultado {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .quiz {
+        padding: 20px;
+    }
+
+    .categoria button {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .resultado i {
+        font-size: 44px;
+    }
+
+    .resultado h3 {
+        font-size: 22px;
+    }
+}
