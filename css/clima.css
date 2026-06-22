@@ -85,7 +85,7 @@ body{
     width: 100%;
     height: 130px;
     border-radius: 24px;
-    background-image: url(.//img/Gemini_Generated_Image_njj6wmnjj6wmnjj6.png);
+    background-image: url(../img/Gemini_Generated_Image_njj6wmnjj6wmnjj6.png);
     background-size: cover;
     background-position: center 35%;
     background-repeat: no-repeat;
@@ -278,7 +278,7 @@ body{
     height: 240px;
     border-radius: 22px;
     overflow: hidden;
-    background-image: url(.//img/ChatGPT\ Image\ 21\ de\ mai.\ de\ 2026\,\ 17_10_25.png);
+    background-image: url(../img/ChatGPT\ Image\ 21\ de\ mai.\ de\ 2026\,\ 17_10_25.png);
     background-size: cover;
     background-position: center;
 }

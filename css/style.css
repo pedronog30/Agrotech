@@ -132,7 +132,7 @@ header {
     align-items: center;
     margin-bottom: 25px;
     padding: 40px 30px;
-    background-image: url('./img/agro.jpeg');
+    background-image: url('../img/agro.jpeg');
     background-size: cover;
     background-position: center;
     border-radius: 10px;
@@ -355,7 +355,7 @@ body {
 }
 
 .header-colheita {
-    background-image: url('./img/img header colheita.png');
+    background-image: url('../img/img\ header\ colheita.png');
 
 }
 
