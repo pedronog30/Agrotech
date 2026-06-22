@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 body {
@@ -199,3 +199,5 @@ main {
     color: #3B6D11;
     font-size: 15px;
 }
+
+
