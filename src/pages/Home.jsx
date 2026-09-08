@@ -322,6 +322,14 @@ export default function Home() {
               <i className="fa-solid fa-circle-play"></i> Pitch Video V2
             </a>
           </li>
+
+          <li>
+            <a href="https://youtu.be/eJOefE6VJRA" target="_blank" rel="noopener noreferrer">
+              <i className="fa-solid fa-circle-play"></i> Pitch Video V3 REACT
+            </a>
+          </li>
+
+
         </Menu>
       </div>
 
