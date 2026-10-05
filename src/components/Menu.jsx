@@ -45,6 +45,11 @@ export default function Menu({ children }) {
             <i className="fa-solid fa-envelope"></i> Contato
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/historico-climatico" className={ativo}>
+            <i className="fa-solid fa-chart-line"></i> Histórico climático
+          </NavLink>
+        </li>
         {children}
       </ul>
     </nav>
