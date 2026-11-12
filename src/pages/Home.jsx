@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Menu from '../components/Menu.jsx'
 import usePageStyle from '../hooks/usePageStyle.js'
 
-const apiKey = '056ff87db5107a65501e9bc92c30dda2'
+
 
 
 function getClimaIconeInfo(descricao) {
@@ -141,7 +141,7 @@ export default function Home() {
         const lat = position.coords.latitude
         const lon = position.coords.longitude
 
-        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`
+        const url = `/api/clima?tipo=weather&lat=${lat}&lon=${lon}`
 
         fetch(url)
           .then((response) => response.json())
@@ -233,7 +233,7 @@ export default function Home() {
             console.log('Erro ao buscar clima: ' + error)
           })
 
-        const urlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`
+        const urlForecast = `/api/clima?tipo=forecast&lat=${lat}&lon=${lon}`
 
         fetch(urlForecast)
           .then((response) => response.json())
