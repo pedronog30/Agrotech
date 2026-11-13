@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import Menu from '../components/Menu.jsx'
-import usePageStyle from '../hooks/usePageStyle.js'
+import { Link } from 'react-router-dom'
+import Layout from '../components/Layout.jsx'
 
 
 
@@ -22,7 +22,7 @@ function getClimaIconeInfo(descricao) {
 function calcularRecomendacaoPlantio(temp, umidade, chuvaValor) {
   if (temp >= 18 && temp <= 30 && umidade >= 50 && chuvaValor <= 5) {
     return {
-      classe: 'rec-favoravel',
+      classe: 'item-bom',
       icone: 'fa-seedling',
       titulo: 'Ótimo para plantar Milho!',
       texto: `Temperatura (${Math.round(temp)}°C) e umidade (${umidade}%) estão ideais.`,
@@ -30,7 +30,7 @@ function calcularRecomendacaoPlantio(temp, umidade, chuvaValor) {
   }
   if (temp >= 18 && temp <= 28 && umidade >= 50 && umidade <= 80 && chuvaValor <= 5) {
     return {
-      classe: 'rec-favoravel',
+      classe: 'item-bom',
       icone: 'fa-seedling',
       titulo: 'Bom para plantar Feijão!',
       texto: `Umidade (${umidade}%) dentro do ideal para o feijão.`,
@@ -38,14 +38,14 @@ function calcularRecomendacaoPlantio(temp, umidade, chuvaValor) {
   }
   if (chuvaValor > 5) {
     return {
-      classe: 'rec-atencao',
+      classe: 'item-atencao',
       icone: 'fa-cloud-rain',
       titulo: 'Aguarde a chuva passar',
       texto: 'Chuva intensa não é ideal para o plantio agora.',
     }
   }
   return {
-    classe: 'rec-desfavoravel',
+    classe: 'item-ruim',
     icone: 'fa-triangle-exclamation',
     titulo: 'Condições desfavoráveis',
     texto: 'Temperatura ou umidade fora do ideal para plantio.',
@@ -55,7 +55,7 @@ function calcularRecomendacaoPlantio(temp, umidade, chuvaValor) {
 function calcularRecomendacaoColheita(temp, umidade, chuvaValor) {
   if (temp >= 25 && umidade < 60 && chuvaValor === 0) {
     return {
-      classe: 'rec-favoravel',
+      classe: 'item-bom',
       icone: 'fa-wheat-awn',
       titulo: 'Ótimo momento para colher Feijão!',
       texto: 'Tempo seco e quente favorece a colheita.',
@@ -63,14 +63,14 @@ function calcularRecomendacaoColheita(temp, umidade, chuvaValor) {
   }
   if (chuvaValor > 0) {
     return {
-      classe: 'rec-atencao',
+      classe: 'item-atencao',
       icone: 'fa-cloud-rain',
       titulo: 'Evite colher com chuva',
       texto: 'A umidade pode danificar os grãos colhidos.',
     }
   }
   return {
-    classe: 'rec-neutro',
+    classe: 'item-neutro',
     icone: 'fa-clock',
     titulo: 'Aguarde o momento certo',
     texto: 'Condições ainda não ideais para a colheita.',
@@ -109,14 +109,13 @@ function gerarSemanasCalendario(diasCondicao) {
 const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
 
 export default function Home() {
-  usePageStyle('/css/style.css')
 
   // Cada coisa que antes era escrita direto num elemento do DOM
   // (textContent, innerHTML) agora é uma variável de estado.
   const [localizacao, setLocalizacao] = useState(null)
   const [erroLocalizacao, setErroLocalizacao] = useState(null)
   const [temperatura, setTemperatura] = useState(null)
-  const [descricaoClima, setDescricaoClima] = useState('...Carregando')
+  const [descricaoClima, setDescricaoClima] = useState('Carregando...')
   const [iconeClima, setIconeClima] = useState(null)
   const [chuva, setChuva] = useState(null)
   const [umidade, setUmidade] = useState(null)
@@ -126,6 +125,7 @@ export default function Home() {
   const [recPlantio, setRecPlantio] = useState(null)
   const [recColheita, setRecColheita] = useState(null)
   const [diasCondicao, setDiasCondicao] = useState({})
+  const [erroClima, setErroClima] = useState(null)
 
   // useEffect com [] no final = "roda só uma vez, quando a página
   // é montada" — é o equivalente do código que antes ficava solto
@@ -147,14 +147,14 @@ export default function Home() {
           .then((response) => response.json())
           .then((data) => {
             if (data.cod !== 200) {
-              console.log('Erro na API: ' + data.message)
+              setErroClima('Não foi possível carregar o clima agora. Tente novamente mais tarde.')
               return
             }
 
             const temp = data.main.temp
             const chuvaValor = data.rain ? data.rain['1h'] : 0
             const umidadeValor = data.main.humidity
-            const ventoValor = data.wind.speed
+            const ventoValor = Math.round(data.wind.speed * 3.6) // a API manda em m/s → km/h
             const descricao = data.weather[0].description
 
             setTemperatura(Math.round(temp))
@@ -229,8 +229,8 @@ export default function Home() {
             setRecPlantio(calcularRecomendacaoPlantio(temp, umidadeValor, chuvaValor))
             setRecColheita(calcularRecomendacaoColheita(temp, umidadeValor, chuvaValor))
           })
-          .catch((error) => {
-            console.log('Erro ao buscar clima: ' + error)
+          .catch(() => {
+            setErroClima('Não foi possível carregar o clima agora. Tente novamente mais tarde.')
           })
 
         const urlForecast = `/api/clima?tipo=forecast&lat=${lat}&lon=${lon}`
@@ -288,13 +288,13 @@ export default function Home() {
             setPrevisaoSemanal(dias)
             setDiasCondicao(novoDiasCondicao)
           })
-          .catch((error) => {
-            console.log('Erro ao buscar previsão: ' + error)
+          .catch(() => {
+            setErroClima('Não foi possível carregar a previsão agora. Tente novamente mais tarde.')
           })
       },
-      (error) => {
-        console.log('Erro de geolocalização: ' + error.message)
-        setErroLocalizacao('Não foi possível obter sua localização.')
+      () => {
+        setErroLocalizacao('Localização não permitida')
+        setErroClima('Permita o acesso à localização para ver o clima da sua região.')
       },
     )
   }, [])
@@ -303,178 +303,172 @@ export default function Home() {
   const mesFormatado = nomeMes.charAt(0).toUpperCase() + nomeMes.slice(1)
   const semanas = gerarSemanasCalendario(diasCondicao)
 
+  const hojeTexto = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })
+  const hojeFormatado = hojeTexto.charAt(0).toUpperCase() + hojeTexto.slice(1)
+
+  // Cor de cada tipo de alerta no novo visual
+  const CLASSE_ALERTA = {
+    chuva: 'icone-box azul',
+    frio: 'icone-box azul',
+    calor: 'icone-box atencao',
+    seco: 'icone-box atencao',
+    vento: 'icone-box atencao',
+    tempestade: 'icone-box ruim',
+    ok: 'icone-box',
+  }
+
   return (
-    <>
-      <div className="container">
-        <div className="card-logo">
-          <i className="fa-solid fa-leaf"></i>
-          <h1>AgroConsulta</h1>
-          <p>informações que cultivam resultado</p>
+    <Layout>
+      <header className="cabecalho">
+        <div>
+          <span className="cabecalho-sobre">{hojeFormatado}</span>
+          <h1>Olá! Veja como está sua plantação hoje</h1>
         </div>
-        <Menu>
-          <li>
-            <a href="https://youtu.be/bkePyXbytpI?feature=shared" target="_blank" rel="noopener noreferrer">
-              <i className="fa-solid fa-circle-play"></i> Pitch Video V1
-            </a>
-          </li>
-          <li>
-            <a href="https://youtu.be/koGNC3qTVJM" target="_blank" rel="noopener noreferrer">
-              <i className="fa-solid fa-circle-play"></i> Pitch Video V2
-            </a>
-          </li>
+        <span className="chip">
+          <i className="fa-solid fa-location-dot"></i> {localizacao ?? erroLocalizacao ?? 'Localizando...'}
+        </span>
+      </header>
 
-          <li>
-            <a href="https://youtu.be/eJOefE6VJRA" target="_blank" rel="noopener noreferrer">
-              <i className="fa-solid fa-circle-play"></i> Pitch Video V3 REACT
-            </a>
-          </li>
+      {erroClima && <p className="aviso aviso-erro">{erroClima}</p>}
 
-
-        </Menu>
-      </div>
-
-      <main>
-        <header>
-          <div>
-            <h2>Olá! 👋</h2>
-            <p>Veja as recomendações para sua plantação hoje.</p>
-          </div>
-          <span id="localizacao">
-            <i className="fa-solid fa-location-dot"></i> {localizacao ?? erroLocalizacao ?? 'Localizando...'}
-          </span>
-        </header>
-
-        <section className="clima">
-          <h3>
-            <i className="fa-solid fa-cloud-sun"></i> Condições de clima
-          </h3>
-          <div className="clima-conteudo">
-            <div className="clima-esquerda">
-              <span id="clima-icone">
-                {iconeClima && (
-                  <i className={`fa-solid ${iconeClima.icone}`} style={{ color: iconeClima.cor, fontSize: 64 }}></i>
-                )}
-              </span>
-              <span id="Temperatura">{temperatura !== null ? `${temperatura}°C` : '-- C'}</span>
-              <span id="Descricao-clima">{descricaoClima}</span>
-            </div>
-            <div className="clima-direita">
-              <p>
-                <i className="fa-solid fa-droplet"></i> Chuva{' '}
-                <span id="Chuva">{chuva !== null ? `${chuva}%` : '-- %'}</span>
-              </p>
-              <p>
-                <i className="fa-solid fa-water"></i> Umidade{' '}
-                <span id="Umidade">{umidade !== null ? `${umidade}%` : '-- %'}</span>
-              </p>
-              <p>
-                <i className="fa-solid fa-wind"></i> Vento{' '}
-                <span id="Vento">{vento !== null ? `${vento} km/h` : '-- km/h'}</span>
-              </p>
-            </div>
-          </div>
-          <div className="previsao-semanal" id="previsao-semanal">
-            {previsaoSemanal.map((d) => (
-              <div className="previsao-dia" key={d.key}>
-                <span className="dia-nome">{d.nomeDia}</span>
-                <span className="previsao-icone">
-                  <i className={`fa-solid ${d.icone.icone}`} style={{ color: d.icone.cor, fontSize: 64 }}></i>
-                </span>
-                <span className="dia-temp">
-                  {d.tempMax}° / {d.tempMin}°
-                </span>
+      <div className="linha">
+        <section className="card-escuro" style={{ flex: '2 1 560px' }} aria-label="Condições de clima">
+          <div className="clima-topo">
+            <div className="clima-agora">
+              <span className="rotulo">Agora</span>
+              <div className="clima-temp">
+                <strong>{temperatura !== null ? `${temperatura}°` : '--°'}</strong>
+                {iconeClima && <i className={`fa-solid ${iconeClima.icone}`}></i>}
               </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="recomendacoes">
-          <h3>
-            <i className="fa-solid fa-cloud-sun"></i>Recomendações para você
-          </h3>
-          <div className="quando-plantar">
-            {recPlantio && (
-              <div className={`rec-card ${recPlantio.classe}`}>
-                <i className={`fa-solid ${recPlantio.icone}`}></i>
-                <div>
-                  <strong>{recPlantio.titulo}</strong>
-                  <p>{recPlantio.texto}</p>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="quando-colher">
-            {recColheita && (
-              <div className={`rec-card ${recColheita.classe}`}>
-                <i className={`fa-solid ${recColheita.icone}`}></i>
-                <div>
-                  <strong>{recColheita.titulo}</strong>
-                  <p>{recColheita.texto}</p>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-
-        <div className="cards-bottom">
-          <section className="calendario">
-            <h3>
-              <i className="fa-solid fa-calendar-days"></i> Calendário Agrícola
-            </h3>
-            <span id="mes">{mesFormatado}</span>
-            <div id="calendario-conteudo">
-              <table>
-                <thead>
-                  <tr>
-                    {DIAS_SEMANA.map((d) => (
-                      <th key={d}>{d}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {semanas.map((semana, i) => (
-                    <tr key={i}>
-                      {semana.map((cel) => (
-                        <td key={cel.key} className={cel.tipo === 'vazio' || cel.tipo === 'normal' ? '' : cel.tipo}>
-                          {cel.dia ?? ''}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <span className="clima-descricao">{descricaoClima}</span>
             </div>
-            <div className="legenda-calendario">
-              <span className="legenda-item">
-                <span className="legenda-cor" style={{ backgroundColor: '#1565c0' }}></span> Hoje
-              </span>
-              <span className="legenda-item">
-                <span className="legenda-cor" style={{ backgroundColor: '#2e7d32' }}></span> Bom para plantar
-              </span>
-              <span className="legenda-item">
-                <span className="legenda-cor" style={{ backgroundColor: '#f9a825' }}></span> Bom para colher
-              </span>
-            </div>
-          </section>
 
-          <section className="alertas">
-            <h3>
-              <i className="fa-solid fa-bell"></i> Alertas importantes
-            </h3>
-            <div id="alertas-conteudo">
-              {alertas.map((a, i) => (
-                <div className={`alerta-item alerta-${a.tipo}`} key={i}>
-                  <i className={`fa-solid ${a.icone}`}></i>
-                  <div>
-                    <strong>{a.titulo}</strong>
-                    <p>{a.texto}</p>
-                  </div>
+            <div className="clima-metricas">
+              <div className="metrica">
+                <i className="fa-solid fa-cloud-rain"></i>
+                <span>Chuva</span>
+                <strong>{chuva !== null ? `${chuva} mm` : '--'}</strong>
+              </div>
+              <div className="metrica">
+                <i className="fa-solid fa-droplet"></i>
+                <span>Umidade</span>
+                <strong>{umidade !== null ? `${umidade}%` : '--'}</strong>
+              </div>
+              <div className="metrica">
+                <i className="fa-solid fa-wind"></i>
+                <span>Vento</span>
+                <strong>{vento !== null ? `${vento} km/h` : '--'}</strong>
+              </div>
+            </div>
+          </div>
+
+          {previsaoSemanal.length > 0 && (
+            <div className="previsao">
+              {previsaoSemanal.map((d) => (
+                <div className="previsao-dia" key={d.key}>
+                  <span>{d.nomeDia.replace('.', '')}</span>
+                  <i className={`fa-solid ${d.icone.icone}`}></i>
+                  <small>
+                    {d.tempMax}° <em>{d.tempMin}°</em>
+                  </small>
                 </div>
               ))}
             </div>
-          </section>
-        </div>
-      </main>
-    </>
+          )}
+        </section>
+
+        <section className="card" style={{ flex: '1 1 320px' }}>
+          <h2>Recomendações para você</h2>
+          <p className="texto-suave">Calculadas a partir do clima de agora na sua região.</p>
+
+          {[
+            { titulo: 'Plantio', rec: recPlantio },
+            { titulo: 'Colheita', rec: recColheita },
+          ].map(
+            ({ titulo, rec }) =>
+              rec && (
+                <div className={`item ${rec.classe}`} key={titulo}>
+                  <div className="icone-box">
+                    <i className={`fa-solid ${rec.icone}`}></i>
+                  </div>
+                  <div>
+                    <span className="rotulo">{titulo}</span>
+                    <strong>{rec.titulo}</strong>
+                    <p>{rec.texto}</p>
+                  </div>
+                </div>
+              ),
+          )}
+
+          <Link to="/clima" className="botao" style={{ marginTop: 'auto' }}>
+            Ver janela de pulverização
+          </Link>
+        </section>
+      </div>
+
+      <div className="linha">
+        <section className="card" style={{ flex: '3 1 480px' }}>
+          <div className="cabecalho" style={{ padding: 0, alignItems: 'center' }}>
+            <h2>
+              <i className="fa-solid fa-calendar-days"></i> Calendário agrícola
+            </h2>
+            <span className="chip chip-verde">{mesFormatado}</span>
+          </div>
+
+          <table className="calendario-tabela">
+            <thead>
+              <tr>
+                {DIAS_SEMANA.map((d) => (
+                  <th key={d}>{d}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {semanas.map((semana, i) => (
+                <tr key={i}>
+                  {semana.map((cel) => (
+                    <td key={cel.key} className={cel.tipo === 'vazio' || cel.tipo === 'normal' ? '' : cel.tipo}>
+                      {cel.dia ?? ''}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          <div className="legenda">
+            <span>
+              <i style={{ backgroundColor: 'var(--verde-escuro)' }}></i> Hoje
+            </span>
+            <span>
+              <i style={{ backgroundColor: 'var(--limao)' }}></i> Bom para plantar
+            </span>
+            <span>
+              <i style={{ backgroundColor: 'var(--ambar)' }}></i> Bom para colher
+            </span>
+          </div>
+        </section>
+
+        <section className="card" style={{ flex: '2 1 320px' }}>
+          <h2>
+            <i className="fa-solid fa-bell"></i> Alertas importantes
+          </h2>
+
+          {alertas.length === 0 && <p className="texto-suave">Os alertas aparecem assim que o clima carregar.</p>}
+
+          {alertas.map((a, i) => (
+            <div className="item" key={i}>
+              <div className={CLASSE_ALERTA[a.tipo] || 'icone-box'}>
+                <i className={`fa-solid ${a.icone}`}></i>
+              </div>
+              <div>
+                <strong>{a.titulo}</strong>
+                <p>{a.texto}</p>
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
+    </Layout>
   )
 }

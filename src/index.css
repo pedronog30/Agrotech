@@ -1,4 +1,1083 @@
+/* =========================================================
+   AgroConsulta — estilo global
+   Um único arquivo para o site todo. As cores e medidas ficam
+   em variáveis (--nome) no :root: para mudar o verde do site
+   inteiro, basta mudar uma linha aqui.
+   ========================================================= */
+
+:root {
+  --verde-escuro: #10291c;
+  --verde: #1e6b43;
+  --verde-medio: #2a7b51;
+  --verde-linha: #3a8a5f;
+  --limao: #c6e77d;
+  --limao-claro: #eef6e3;
+  --ambar: #f2b544;
+  --ambar-claro: #fdf3de;
+  --ambar-texto: #8a5a00;
+  --vermelho: #b42318;
+  --vermelho-claro: #fdecea;
+  --azul: #1d4f8c;
+  --azul-claro: #dceafb;
+
+  --fundo: #f3f4ee;
+  --superficie: #ffffff;
+  --superficie-suave: #f6f7f2;
+  --borda: #e1e5db;
+  --texto: #13231a;
+  --texto-suave: #4e6656;
+  --texto-claro-menu: #d3e0d7;
+
+  --raio-grande: 28px;
+  --raio-medio: 20px;
+  --raio-pequeno: 14px;
+
+  --fonte: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fonte);
+  background-color: var(--fundo);
+  color: var(--texto);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
 
 #root {
-  display: contents;
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+/* ---------- Estrutura: menu lateral + conteúdo ---------- */
+
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.sidebar {
+  flex: 1 1 240px;
+  max-width: 280px;
+  position: sticky;
+  top: 24px;
+  background-color: var(--verde-escuro);
+  color: var(--texto-claro-menu);
+  border-radius: var(--raio-grande);
+  padding: 28px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+}
+
+.logo-icone {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: var(--raio-pequeno);
+  background-color: var(--limao);
+  color: var(--verde-escuro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.logo strong {
+  display: block;
+  font-size: 19px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.logo span {
+  display: block;
+  font-size: 12px;
+  color: #9db5a5;
+  line-height: 1.3;
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu a,
+.pitch a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: var(--raio-pequeno);
+  color: var(--texto-claro-menu);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.menu a i,
+.pitch a i {
+  width: 20px;
+  text-align: center;
+}
+
+.menu a:hover,
+.pitch a:hover {
+  background-color: #1b3a29;
+  color: #ffffff;
+}
+
+.menu a.ativo {
+  background-color: var(--limao);
+  color: var(--verde-escuro);
+  font-weight: 700;
+}
+
+.pitch {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-top: 1px solid #24432f;
+  padding-top: 18px;
+}
+
+.pitch a {
+  font-size: 14px;
+}
+
+.pitch-titulo {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #9db5a5;
+  padding: 0 14px 6px;
+}
+
+.conteudo {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ---------- Cabeçalho das páginas ---------- */
+
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 8px 4px 0;
+}
+
+.cabecalho-sobre {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto-suave);
+  margin-bottom: 4px;
+}
+
+.cabecalho h1 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.15;
+  color: var(--verde-escuro);
+}
+
+.cabecalho p {
+  color: var(--texto-suave);
+  margin-top: 6px;
+  max-width: 640px;
+}
+
+/* ---------- Peças reutilizáveis ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--verde-escuro);
+}
+
+.chip i {
+  color: var(--verde);
+}
+
+.chip-verde {
+  background-color: var(--limao-claro);
+  border-color: transparent;
+  color: var(--verde);
+}
+
+.linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.linha > * {
+  min-width: 0;
+}
+
+.card {
+  background-color: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-grande);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-escuro {
+  background-color: var(--verde);
+  color: #ffffff;
+  border-radius: var(--raio-grande);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.card h2,
+.titulo-secao {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card h2 i {
+  color: var(--verde);
+  font-size: 18px;
+}
+
+.texto-suave {
+  color: var(--texto-suave);
+  font-size: 14px;
+}
+
+.rotulo {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.icone-box {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border-radius: var(--raio-pequeno);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  background-color: var(--limao);
+  color: var(--verde-escuro);
+}
+
+/* Itens com ícone + texto (recomendações, alertas, resultados) */
+.item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px;
+  border-radius: var(--raio-medio);
+  background-color: var(--superficie-suave);
+}
+
+.item strong {
+  display: block;
+  font-size: 16px;
+}
+
+.item p {
+  font-size: 14px;
+  color: var(--texto-suave);
+  margin-top: 2px;
+}
+
+.item-bom {
+  background-color: var(--limao-claro);
+}
+
+.item-atencao {
+  background-color: var(--ambar-claro);
+}
+
+.item-atencao .icone-box {
+  background-color: var(--ambar);
+  color: #3a2a06;
+}
+
+.item-ruim {
+  background-color: var(--vermelho-claro);
+}
+
+.item-ruim .icone-box {
+  background-color: #f4b4ad;
+  color: #5c120c;
+}
+
+.item-neutro .icone-box,
+.icone-box.neutro {
+  background-color: #e3e8e0;
+  color: var(--texto-suave);
+}
+
+.icone-box.atencao {
+  background-color: var(--ambar);
+  color: #3a2a06;
+}
+
+.icone-box.ruim {
+  background-color: #f4b4ad;
+  color: #5c120c;
+}
+
+.icone-box.azul {
+  background-color: var(--azul-claro);
+  color: var(--azul);
+}
+
+/* Números em destaque (estatísticas) */
+.grade-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.stat {
+  background-color: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-medio);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat span {
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+.stat strong {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.stat strong small {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto-suave);
+}
+
+.stat em {
+  font-style: normal;
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+/* Botões */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border: none;
+  border-radius: var(--raio-pequeno);
+  background-color: var(--verde-escuro);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.botao:hover {
+  background-color: var(--verde);
+}
+
+/* Formulários */
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo-grupo label {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.campo {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--borda);
+  border-radius: var(--raio-pequeno);
+  background-color: var(--superficie-suave);
+  font-size: 15px;
+  color: var(--texto);
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.campo:focus {
+  outline: none;
+  border-color: var(--verde);
+  background-color: #ffffff;
+}
+
+textarea.campo {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.campo-erro {
+  border-color: var(--vermelho);
+  background-color: var(--vermelho-claro);
+}
+
+.erro-msg {
+  font-size: 13px;
+  color: var(--vermelho);
+  min-height: 18px;
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 8px 20px;
+}
+
+/* Mensagens de carregamento e erro */
+.aviso {
+  background-color: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-medio);
+  padding: 20px 24px;
+  color: var(--texto-suave);
+}
+
+.aviso-erro {
+  background-color: var(--vermelho-claro);
+  border-color: #f4b4ad;
+  color: var(--vermelho);
+}
+
+.aviso-sucesso {
+  background-color: var(--limao-claro);
+  border-color: transparent;
+  color: var(--verde);
+  font-weight: 600;
+}
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
+.clima-topo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.clima-agora {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.clima-agora .rotulo {
+  color: var(--limao);
+}
+
+.clima-temp {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.clima-temp strong {
+  font-size: 88px;
+  font-weight: 800;
+  letter-spacing: -4px;
+  line-height: 1;
+}
+
+.clima-temp i {
+  font-size: 54px;
+}
+
+.clima-descricao {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.clima-descricao::first-letter {
+  text-transform: uppercase;
+}
+
+.clima-sub {
+  font-size: 14px;
+  color: #cfe2d5;
+}
+
+.clima-metricas {
+  flex: 1 1 320px;
+  max-width: 440px;
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metrica {
+  background-color: var(--verde-medio);
+  border-radius: 18px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metrica i {
+  color: var(--limao);
+}
+
+.metrica span {
+  font-size: 13px;
+  color: #cfe2d5;
+}
+
+.metrica strong {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.previsao {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  border-top: 1px solid var(--verde-linha);
+  padding-top: 24px;
+}
+
+.previsao-dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 4px;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.previsao-dia:first-child {
+  background-color: #ffffff;
+  color: var(--verde-escuro);
+}
+
+.previsao-dia span {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.previsao-dia i {
+  font-size: 24px;
+}
+
+.previsao-dia small {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.previsao-dia small em {
+  font-style: normal;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.calendario-tabela {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 6px;
+  table-layout: fixed;
+}
+
+.calendario-tabela th {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--texto-suave);
+  padding: 4px 0;
+}
+
+.calendario-tabela td {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 0;
+  border-radius: 12px;
+  background-color: var(--superficie-suave);
+}
+
+.calendario-tabela td:empty {
+  background-color: transparent;
+}
+
+.calendario-tabela td.hoje {
+  background-color: var(--verde-escuro);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.calendario-tabela td.dia-plantar {
+  background-color: var(--limao);
+  color: var(--verde-escuro);
+}
+
+.calendario-tabela td.dia-colher {
+  background-color: var(--ambar);
+  color: #3a2a06;
+}
+
+.legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.legenda span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legenda i {
+  width: 14px;
+  height: 14px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+/* =========================================================
+   CLIMA — janela de pulverização
+   ========================================================= */
+
+.grade-horas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hora {
+  border-radius: var(--raio-medio);
+  border: 2px solid transparent;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.hora h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--texto-suave);
+}
+
+.hora > i {
+  font-size: 24px;
+  color: var(--verde);
+}
+
+.hora .hora-temp {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.hora .hora-extra {
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.hora .hora-status {
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.hora .hora-motivo {
+  font-size: 12px;
+  color: var(--texto-suave);
+}
+
+.pulv-bom {
+  background-color: var(--limao-claro);
+  border-color: #8fc45a;
+}
+
+.pulv-atencao {
+  background-color: var(--ambar-claro);
+  border-color: var(--ambar);
+}
+
+.pulv-evite {
+  background-color: var(--vermelho-claro);
+  border-color: #e9958c;
+}
+
+.ponto {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.ponto-bom {
+  background-color: #4c9a2a;
+}
+
+.ponto-atencao {
+  background-color: #d99a12;
+}
+
+.ponto-evite {
+  background-color: #d14334;
+}
+
+/* =========================================================
+   PLANTIO — quiz
+   ========================================================= */
+
+.quiz-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-grupo h3 {
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.quiz-grupo h3 i {
+  color: var(--verde);
+}
+
+.opcoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.opcao {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--borda);
+  background-color: var(--superficie-suave);
+  color: var(--texto);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.opcao:hover {
+  border-color: var(--verde);
+}
+
+.opcao.selecionado {
+  background-color: var(--verde-escuro);
+  border-color: var(--verde-escuro);
+  color: #ffffff;
+}
+
+.resultado-cultura {
+  align-items: center;
+  text-align: center;
+  padding: 36px 28px;
+}
+
+.resultado-cultura .icone-box {
+  width: 64px;
+  height: 64px;
+  font-size: 28px;
+  border-radius: var(--raio-medio);
+}
+
+.resultado-cultura h2 {
+  justify-content: center;
+  font-size: 26px;
+}
+
+.grade-dicas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+/* =========================================================
+   COLHEITA
+   ========================================================= */
+
+.grade-dias {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* O melhor dia ganha borda mais grossa e uma sombra */
+.dia-melhor {
+  border-width: 3px;
+  box-shadow: 0 8px 24px rgba(30, 107, 67, 0.18);
+}
+
+.selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  background-color: var(--limao);
+  color: var(--verde-escuro);
+}
+
+.linha-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+.linha-info strong,
+.linha-info h2 {
+  color: var(--texto);
+}
+
+/* =========================================================
+   HISTÓRICO CLIMÁTICO
+   ========================================================= */
+
+.grafico {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 240px;
+  padding-top: 10px;
+  overflow-x: auto;
+}
+
+.grafico-item {
+  flex: 1 0 44px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.grafico-valor {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.grafico-barra {
+  width: 100%;
+  max-width: 48px;
+  border-radius: 12px 12px 4px 4px;
+  background-color: var(--verde);
+}
+
+.grafico-item span {
+  font-size: 12px;
+  color: var(--texto-suave);
+}
+
+.tabela-scroll {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 560px;
+}
+
+.tabela th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.select {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--borda);
+  background-color: var(--superficie);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .app {
+    padding: 14px;
+    gap: 16px;
+  }
+
+  /* No celular o menu vira uma faixa no topo, com os links
+     em uma linha que rola para o lado */
+  .sidebar {
+    position: static;
+    max-width: none;
+    min-width: 0;
+    width: 100%;
+    flex-basis: 100%;
+    padding: 18px;
+    gap: 16px;
+  }
+
+  .menu ul {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .menu a {
+    white-space: nowrap;
+  }
+
+  .pitch {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 12px;
+  }
+
+  .pitch-titulo {
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  .cabecalho h1 {
+    font-size: 26px;
+  }
+
+  .grade-horas,
+  .grade-dias {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .card,
+  .card-escuro {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .clima-temp strong {
+    font-size: 64px;
+  }
+
+  .clima-metricas {
+    max-width: none;
+    gap: 8px;
+  }
+
+  .metrica {
+    padding: 12px;
+  }
+
+  .metrica strong {
+    font-size: 18px;
+  }
+
+  .previsao {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }

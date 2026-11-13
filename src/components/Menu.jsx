@@ -11,9 +11,9 @@ function ativo({ isActive }) {
   return isActive ? 'ativo' : undefined
 }
 
-export default function Menu({ children }) {
+export default function Menu() {
   return (
-    <nav className="menu">
+    <nav className="menu" aria-label="Menu principal">
       <ul>
         <li>
           <NavLink to="/" end className={ativo}>
@@ -50,7 +50,6 @@ export default function Menu({ children }) {
             <i className="fa-solid fa-chart-line"></i> Histórico climático
           </NavLink>
         </li>
-        {children}
       </ul>
     </nav>
   )

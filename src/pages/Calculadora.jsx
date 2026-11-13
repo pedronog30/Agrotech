@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import Menu from '../components/Menu.jsx'
-import usePageStyle from '../hooks/usePageStyle.js'
+import Layout from '../components/Layout.jsx'
 
 // Funcionalidade nova da Fase 5: calculadora de custo e lucro do
-// plantio. Reaproveita as mesmas classes CSS que o resto do site já
-// usa (campo/label-campo/erro-msg do formulário de Contato,
-// stats-grid/stat-card da Colheita e rec-card das recomendações da
-// Home) — nenhum CSS novo foi necessário.
+// plantio. Usa as mesmas peças visuais do resto do site (campo,
+// stat, item), definidas no CSS global.
 
 // Aceita tanto "12.5" quanto "12,5" (jeito comum de digitar decimal no Brasil).
 function paraNumero(valor) {
@@ -28,8 +25,6 @@ function formatarReal(valor) {
 }
 
 export default function Calculadora() {
-  usePageStyle('/css/style.css')
-
   // Um useState por campo, igual ao formulário de Contato.
   const [area, setArea] = useState('')
   const [custoHectare, setCustoHectare] = useState('')
@@ -64,184 +59,139 @@ export default function Calculadora() {
     resultado = { custoTotal, producaoTotal, receitaTotal, lucro, margem }
   }
 
-  let classeResultado = 'rec-neutro'
+  let classeResultado = 'item-neutro'
   let iconeResultado = 'fa-circle-info'
   let mensagemResultado = ''
 
   if (resultado) {
     if (resultado.lucro > 0) {
-      classeResultado = 'rec-favoravel'
+      classeResultado = 'item-bom'
       iconeResultado = 'fa-circle-check'
       mensagemResultado = 'Lucro estimado positivo — o plantio parece valer a pena nessas condições.'
     } else if (resultado.lucro === 0) {
-      classeResultado = 'rec-neutro'
+      classeResultado = 'item-neutro'
       iconeResultado = 'fa-circle-info'
       mensagemResultado = 'Resultado no zero a zero: a receita cobre exatamente o custo.'
     } else {
-      classeResultado = 'rec-desfavoravel'
+      classeResultado = 'item-ruim'
       iconeResultado = 'fa-triangle-exclamation'
       mensagemResultado = 'Prejuízo estimado — vale revisar o custo por hectare ou o preço de venda.'
     }
   }
 
   return (
-    <>
-      <div className="container">
-        <div className="card-logo">
-          <i className="fa-solid fa-leaf"></i>
-          <h1>AgroConsulta</h1>
-          <p>informações que cultivam resultado</p>
+    <Layout>
+      <header className="cabecalho">
+        <div>
+          <span className="cabecalho-sobre">Calculadora</span>
+          <h1>Custo e lucro da plantação</h1>
+          <p>Estime o custo, a receita e o lucro antes de plantar. O resultado aparece enquanto você digita.</p>
         </div>
-        <Menu />
-      </div>
+      </header>
 
-      <main>
-        <header>
-          <div>
-            <h2>
-              <i className="fa-solid fa-calculator"></i> Calculadora de custo e lucro
-            </h2>
-            <p>Estime o custo, a receita e o lucro da sua plantação antes de plantar.</p>
+      <section className="card">
+        <h2>
+          <i className="fa-solid fa-seedling"></i> Dados do plantio
+        </h2>
+        <div className="grade-campos">
+            <div className="campo-grupo">
+              <label htmlFor="area">Área plantada (hectares)</label>
+              <input
+                type="text"
+                inputMode="decimal"
+                id="area"
+                className={`campo ${erroArea ? 'campo-erro' : ''}`}
+                placeholder="Ex: 10"
+                value={area}
+                onChange={(e) => setArea(e.target.value)}
+              />
+              <span className="erro-msg">{erroArea}</span>
+            </div>
+            <div className="campo-grupo">
+              <label htmlFor="custo">Custo por hectare (R$/ha)</label>
+              <input
+                type="text"
+                inputMode="decimal"
+                id="custo"
+                className={`campo ${erroCusto ? 'campo-erro' : ''}`}
+                placeholder="Ex: 3500"
+                value={custoHectare}
+                onChange={(e) => setCustoHectare(e.target.value)}
+              />
+              <span className="erro-msg">{erroCusto}</span>
+            </div>
+            <div className="campo-grupo">
+              <label htmlFor="produtividade">Produtividade esperada (sacas/ha)</label>
+              <input
+                type="text"
+                inputMode="decimal"
+                id="produtividade"
+                className={`campo ${erroProdutividade ? 'campo-erro' : ''}`}
+                placeholder="Ex: 60"
+                value={produtividade}
+                onChange={(e) => setProdutividade(e.target.value)}
+              />
+              <span className="erro-msg">{erroProdutividade}</span>
+            </div>
+            <div className="campo-grupo">
+              <label htmlFor="preco">Preço de venda (R$ por saca)</label>
+              <input
+                type="text"
+                inputMode="decimal"
+                id="preco"
+                className={`campo ${erroPreco ? 'campo-erro' : ''}`}
+                placeholder="Ex: 120"
+                value={precoVenda}
+                onChange={(e) => setPrecoVenda(e.target.value)}
+              />
+              <span className="erro-msg">{erroPreco}</span>
+            </div>
+        </div>
+      </section>
+
+      {resultado ? (
+        <>
+          <div className="grade-stats">
+            <div className="stat">
+              <span>Custo total</span>
+              <strong>{formatarReal(resultado.custoTotal)}</strong>
+              <em>investido na plantação</em>
+            </div>
+            <div className="stat">
+              <span>Produção total</span>
+              <strong>
+                {resultado.producaoTotal.toLocaleString('pt-BR')} <small>sacas</small>
+              </strong>
+              <em>estimadas na safra</em>
+            </div>
+            <div className="stat">
+              <span>Receita total</span>
+              <strong>{formatarReal(resultado.receitaTotal)}</strong>
+              <em>com a venda da safra</em>
+            </div>
+            <div className="stat">
+              <span>Margem de lucro</span>
+              <strong>{resultado.margem.toFixed(1)}%</strong>
+              <em>sobre a receita</em>
+            </div>
           </div>
-        </header>
 
-        <section className="clima">
-          <h3>
-            <i className="fa-solid fa-seedling"></i> Dados do plantio
-          </h3>
-          <p>Preencha os campos abaixo para calcular a estimativa.</p>
-
-          <label htmlFor="area" className="label-campo">
-            Área plantada (hectares)
-          </label>
-          <input
-            type="text"
-            inputMode="decimal"
-            id="area"
-            className={`campo ${erroArea ? 'campo-erro' : ''}`}
-            placeholder="Ex: 10"
-            value={area}
-            onChange={(e) => setArea(e.target.value)}
-          />
-          <span className="erro-msg">{erroArea}</span>
-
-          <label htmlFor="custo" className="label-campo">
-            Custo por hectare (R$/ha)
-          </label>
-          <input
-            type="text"
-            inputMode="decimal"
-            id="custo"
-            className={`campo ${erroCusto ? 'campo-erro' : ''}`}
-            placeholder="Ex: 3500"
-            value={custoHectare}
-            onChange={(e) => setCustoHectare(e.target.value)}
-          />
-          <span className="erro-msg">{erroCusto}</span>
-
-          <label htmlFor="produtividade" className="label-campo">
-            Produtividade esperada (sacas/ha)
-          </label>
-          <input
-            type="text"
-            inputMode="decimal"
-            id="produtividade"
-            className={`campo ${erroProdutividade ? 'campo-erro' : ''}`}
-            placeholder="Ex: 60"
-            value={produtividade}
-            onChange={(e) => setProdutividade(e.target.value)}
-          />
-          <span className="erro-msg">{erroProdutividade}</span>
-
-          <label htmlFor="preco" className="label-campo">
-            Preço de venda (R$ por saca)
-          </label>
-          <input
-            type="text"
-            inputMode="decimal"
-            id="preco"
-            className={`campo ${erroPreco ? 'campo-erro' : ''}`}
-            placeholder="Ex: 120"
-            value={precoVenda}
-            onChange={(e) => setPrecoVenda(e.target.value)}
-          />
-          <span className="erro-msg">{erroPreco}</span>
-        </section>
-
-        {resultado ? (
-          <>
-            <section className="stats-section">
-              <h2>
-                <i className="fa-solid fa-chart-simple"></i> RESULTADO ESTIMADO
-              </h2>
-              <div className="stats-grid">
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fa-solid fa-money-bill-wave"></i>
-                  </div>
-                  <div>
-                    <p>Custo total</p>
-                    <h3>{formatarReal(resultado.custoTotal)}</h3>
-                    <small>investido na lavoura</small>
-                  </div>
-                </div>
-
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fa-solid fa-wheat-awn"></i>
-                  </div>
-                  <div>
-                    <p>Produção total</p>
-                    <h3>
-                      {resultado.producaoTotal.toLocaleString('pt-BR')} <span>sacas</span>
-                    </h3>
-                    <small>estimadas na safra</small>
-                  </div>
-                </div>
-
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fa-solid fa-sack-dollar"></i>
-                  </div>
-                  <div>
-                    <p>Receita total</p>
-                    <h3>{formatarReal(resultado.receitaTotal)}</h3>
-                    <small>com a venda da safra</small>
-                  </div>
-                </div>
-
-                <div className="stat-card">
-                  <div className="stat-icon">
-                    <i className="fa-solid fa-percent"></i>
-                  </div>
-                  <div>
-                    <p>Margem de lucro</p>
-                    <h3>{resultado.margem.toFixed(1)}%</h3>
-                    <small>sobre a receita</small>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section className="recomendacoes">
-              <h3>
-                <i className="fa-solid fa-circle-dollar-to-slot"></i> Resultado
-              </h3>
-              <div className={`rec-card ${classeResultado}`}>
-                <i className={`fa-solid ${iconeResultado}`}></i>
-                <div>
-                  <strong>Lucro estimado: {formatarReal(resultado.lucro)}</strong>
-                  <p>{mensagemResultado}</p>
-                </div>
-              </div>
-            </section>
-          </>
-        ) : (
-          <section className="recomendacoes">
-            <p>🧮 Preencha os quatro campos acima para ver o custo, a receita e o lucro estimados.</p>
-          </section>
-        )}
-      </main>
-    </>
+          <div className={`item ${classeResultado}`}>
+            <div className="icone-box">
+              <i className={`fa-solid ${iconeResultado}`}></i>
+            </div>
+            <div>
+              <strong>Lucro estimado: {formatarReal(resultado.lucro)}</strong>
+              <p>{mensagemResultado}</p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <p className="aviso">
+          <i className="fa-solid fa-calculator"></i> Preencha os quatro campos acima para ver o custo, a receita e o
+          lucro estimados.
+        </p>
+      )}
+    </Layout>
   )
 }

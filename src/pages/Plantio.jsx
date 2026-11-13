@@ -1,12 +1,8 @@
 import { useState } from 'react'
-import Menu from '../components/Menu.jsx'
-import usePageStyle from '../hooks/usePageStyle.js'
+import Layout from '../components/Layout.jsx'
 import culturas from '../data/culturas.js'
 
 export default function Plantio() {
-  usePageStyle('/css/plantio.css')
-
-  
   const [escolhas, setEscolhas] = useState({ clima: null, umidade: null, estacao: null })
 
   function selecionar(categoria, valor) {
@@ -14,56 +10,62 @@ export default function Plantio() {
   }
 
   function classeBotao(categoria, valor) {
-    return escolhas[categoria] === valor ? 'selecionado' : ''
+    return escolhas[categoria] === valor ? 'opcao selecionado' : 'opcao'
   }
 
   let resultado
+  let cultura = null // fica fora do if para as dicas lá embaixo usarem
   if (!escolhas.clima || !escolhas.umidade || !escolhas.estacao) {
-    resultado = <p>🌱 Selecione clima, umidade e estação para ver a melhor opção</p>
+    resultado = (
+      <>
+        <div className="icone-box neutro">
+          <i className="fa-solid fa-seedling"></i>
+        </div>
+        <h2>Sua recomendação aparece aqui</h2>
+        <p className="texto-suave">Selecione clima, umidade e estação para ver a melhor cultura.</p>
+      </>
+    )
   } else {
     const chave = `${escolhas.clima}-${escolhas.umidade}-${escolhas.estacao}`
-    const cultura = culturas[chave]
+    cultura = culturas[chave]
 
     resultado = cultura ? (
       <>
-        <i className={`fa-solid ${cultura.icone}`}></i>
-        <h3>{cultura.nome}</h3>
-        <p>{cultura.dica}</p>
+        <div className="icone-box">
+          <i className={`fa-solid ${cultura.icone}`}></i>
+        </div>
+        <span className="rotulo" style={{ color: 'var(--verde)' }}>Melhor opção para você</span>
+        <h2>{cultura.nome}</h2>
+        <p className="texto-suave">{cultura.dica}</p>
       </>
     ) : (
       <>
-        <i className="fa-solid fa-magnifying-glass"></i>
-        <h3>Combinação incomum</h3>
-        <p>Tente ajustar o clima ou a umidade para ver outras opções</p>
+        <div className="icone-box atencao">
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <h2>Combinação incomum</h2>
+        <p className="texto-suave">Tente ajustar o clima ou a umidade para ver outras opções.</p>
       </>
     )
   }
 
   return (
-    <>
-      <aside className="sidebar">
-        <div className="card-logo">
-          <i className="fa-solid fa-leaf"></i>
-          <h1>AgroConsulta</h1>
-          <p>informações que cultivam resultado</p>
+    <Layout>
+      <header className="cabecalho">
+        <div>
+          <span className="cabecalho-sobre">Plantio</span>
+          <h1>Descubra a melhor cultura para plantar</h1>
+          <p>Responda três perguntas sobre a sua região e veja qual cultura combina com ela.</p>
         </div>
-        <Menu />
-      </aside>
+      </header>
 
-      <main>
-        <header className="barra_topo">
-          <h2>PLANTAÇÃO</h2>
-          <p>Aqui te ajudaremos a criar uma plantação sustentável.</p>
-        </header>
-
-        <section className="quiz">
-          <h2>Vamos descobrir a melhor opção para sua plantação</h2>
-
-          <div className="opcoes-quiz">
-            <div className="categoria">
-              <h3>
-                <i className="fa-solid fa-temperature-half"></i> Clima
-              </h3>
+      <div className="linha">
+        <section className="card" style={{ flex: '3 1 480px', gap: 24 }}>
+          <div className="quiz-grupo">
+            <h3>
+              <i className="fa-solid fa-temperature-half"></i> Clima
+            </h3>
+            <div className="opcoes">
               <button className={classeBotao('clima', 'quente')} onClick={() => selecionar('clima', 'quente')}>
                 Quente
               </button>
@@ -74,11 +76,13 @@ export default function Plantio() {
                 Frio
               </button>
             </div>
+          </div>
 
-            <div className="categoria">
-              <h3>
-                <i className="fa-solid fa-droplet"></i> Umidade
-              </h3>
+          <div className="quiz-grupo">
+            <h3>
+              <i className="fa-solid fa-droplet"></i> Umidade
+            </h3>
+            <div className="opcoes">
               <button className={classeBotao('umidade', 'seco')} onClick={() => selecionar('umidade', 'seco')}>
                 Seco
               </button>
@@ -86,11 +90,13 @@ export default function Plantio() {
                 Úmido
               </button>
             </div>
+          </div>
 
-            <div className="categoria">
-              <h3>
-                <i className="fa-solid fa-calendar"></i> Estação
-              </h3>
+          <div className="quiz-grupo">
+            <h3>
+              <i className="fa-solid fa-calendar"></i> Estação
+            </h3>
+            <div className="opcoes">
               <button className={classeBotao('estacao', 'verao')} onClick={() => selecionar('estacao', 'verao')}>
                 Verão
               </button>
@@ -110,10 +116,37 @@ export default function Plantio() {
           </div>
         </section>
 
-        <section className="resultado" id="resultado">
+        <section className="card resultado-cultura" style={{ flex: '2 1 320px' }} aria-live="polite">
           {resultado}
         </section>
-      </main>
-    </>
+      </div>
+
+      {cultura && (
+        <section className="card">
+          <h2>
+            <i className={`fa-solid ${cultura.icone}`}></i> Dicas para cultivar {cultura.nome.toLowerCase()}
+          </h2>
+
+          <div className="grade-dicas">
+            {cultura.dicas.map((d) => (
+              <div className="item" key={d.titulo}>
+                <div className={d.titulo === 'Atenção' ? 'icone-box atencao' : 'icone-box'}>
+                  <i className={`fa-solid ${d.icone}`}></i>
+                </div>
+                <div>
+                  <strong>{d.titulo}</strong>
+                  <p>{d.texto}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="texto-suave">
+            <i className="fa-solid fa-circle-info"></i> Valores de referência: podem variar com a região e a variedade.
+            Na dúvida, consulte um técnico agrícola.
+          </p>
+        </section>
+      )}
+    </Layout>
   )
 }

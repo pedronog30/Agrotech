@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
-import usePageStyle from "../hooks/usePageStyle.js";
-import Menu from "../components/Menu.jsx";
+import Layout from "../components/Layout.jsx";
 
 
 
@@ -128,8 +127,6 @@ const dadosHistorico = [
 ];
 
 function HistoricoClimatico() {
-   usePageStyle("/css/historico-climatico.css");
-  
     const [periodo, setPeriodo] = useState(7);
 
   const dadosFiltrados = useMemo(() => {
@@ -166,38 +163,27 @@ function HistoricoClimatico() {
   );
 
   return (
-    
-    <main className="historico-page">
-      <section className="historico-header">
+    <Layout>
+      <header className="cabecalho">
         <div>
-          <span className="historico-badge">
-            <i className="fa-solid fa-cloud-sun"></i>
-            DADOS SIMULADOS
-          </span>
-
-          <h1>Histórico climático</h1>
-
-
+          <span className="cabecalho-sobre">Histórico climático</span>
+          <h1>Como o clima se comportou</h1>
           <p>
-            Consulte os dados climáticos registrados nos últimos dias
-            para acompanhar as condições da sua região.
+            Consulte os dados climáticos registrados nos últimos dias para
+            acompanhar as condições da sua região.
           </p>
         </div>
-    
-        <div className="menu-container">
-          <div className="card-logo">
-          <i className="fa-solid fa-leaf"></i>
-          <h1>AgroConsulta</h1>
-          <p>informações que cultivam resultado</p>
-        </div>
-          <Menu />
-        </div>
 
-        <div className="historico-filtro">
-          <label htmlFor="periodo">Período</label>
-
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
+          <span className="chip chip-verde">
+            <i className="fa-solid fa-flask"></i> Dados simulados
+          </span>
+          <label htmlFor="periodo" className="texto-suave">
+            Período
+          </label>
           <select
             id="periodo"
+            className="select"
             value={periodo}
             onChange={(event) => setPeriodo(Number(event.target.value))}
           >
@@ -205,53 +191,38 @@ function HistoricoClimatico() {
             <option value={15}>Últimos 15 dias</option>
           </select>
         </div>
-      </section>
+      </header>
 
-      <section className="historico-cards">
-        <article className="historico-card">
-          <div className="historico-card-icon">
-            <i className="fa-solid fa-temperature-half"></i>
-          </div>
+      <div className="grade-stats">
+        <div className="stat">
+          <span>
+            <i className="fa-solid fa-temperature-half"></i> Média da temperatura máxima
+          </span>
+          <strong>{mediaTemperatura}°C</strong>
+        </div>
+        <div className="stat">
+          <span>
+            <i className="fa-solid fa-cloud-showers-heavy"></i> Chuva acumulada
+          </span>
+          <strong>
+            {totalChuva} <small>mm</small>
+          </strong>
+        </div>
+        <div className="stat">
+          <span>
+            <i className="fa-solid fa-droplet"></i> Umidade média
+          </span>
+          <strong>{mediaUmidade}%</strong>
+        </div>
+      </div>
 
-          <div>
-            <span>Média da temperatura</span>
-            <strong>{mediaTemperatura}°C</strong>
-          </div>
-        </article>
-
-        <article className="historico-card">
-          <div className="historico-card-icon">
-            <i className="fa-solid fa-cloud-showers-heavy"></i>
-          </div>
-
-          <div>
-            <span>Chuva acumulada</span>
-            <strong>{totalChuva} mm</strong>
-          </div>
-        </article>
-
-        <article className="historico-card">
-          <div className="historico-card-icon">
-            <i className="fa-solid fa-droplet"></i>
-          </div>
-
-          <div>
-            <span>Umidade média</span>
-            <strong>{mediaUmidade}%</strong>
-          </div>
-        </article>
-      </section>
-
-      <section className="historico-grafico">
-        <div className="historico-section-title">
+      <section className="card">
+        <div className="linha-info">
           <div>
             <h2>Temperatura máxima</h2>
-            <p>Comparação das temperaturas máximas do período.</p>
+            <p className="texto-suave">Comparação das temperaturas máximas do período.</p>
           </div>
-
-          <span>
-            Máxima: {maiorTemperatura}°C
-          </span>
+          <span className="chip chip-verde">Máxima: {maiorTemperatura}°C</span>
         </div>
 
         <div className="grafico">
@@ -260,34 +231,26 @@ function HistoricoClimatico() {
             .reverse()
             .map((item) => (
               <div className="grafico-item" key={item.data}>
-                <div className="grafico-valor">
-                  {item.tempMax}°
-                </div>
-
+                <div className="grafico-valor">{item.tempMax}°</div>
                 <div
                   className="grafico-barra"
-                  style={{
-                    height: `${(item.tempMax / 35) * 100}%`,
-                  }}
+                  style={{ height: `${(item.tempMax / 35) * 100}%` }}
                   title={`${item.data}: ${item.tempMax}°C`}
                 ></div>
-
                 <span>{item.data.slice(0, 5)}</span>
               </div>
             ))}
         </div>
       </section>
 
-      <section className="historico-tabela-container">
-        <div className="historico-section-title">
-          <div>
-            <h2>Detalhes do histórico</h2>
-            <p>Confira os dados climáticos de cada dia.</p>
-          </div>
+      <section className="card">
+        <div>
+          <h2>Detalhes do histórico</h2>
+          <p className="texto-suave">Confira os dados climáticos de cada dia.</p>
         </div>
 
-        <div className="historico-tabela-scroll">
-          <table className="historico-tabela">
+        <div className="tabela-scroll">
+          <table className="tabela">
             <thead>
               <tr>
                 <th>Data</th>
@@ -298,24 +261,18 @@ function HistoricoClimatico() {
                 <th>Umidade</th>
               </tr>
             </thead>
-
             <tbody>
               {dadosFiltrados.map((item) => (
                 <tr key={item.data}>
                   <td>{item.data}</td>
-
                   <td>
-                    <span className="condicao">
+                    <span className="selo" style={{ backgroundColor: "var(--superficie-suave)", color: "var(--texto)" }}>
                       {item.condicao}
                     </span>
                   </td>
-
                   <td>{item.tempMin}°C</td>
-
                   <td>{item.tempMax}°C</td>
-
                   <td>{item.chuva} mm</td>
-
                   <td>{item.umidade}%</td>
                 </tr>
               ))}
@@ -323,7 +280,7 @@ function HistoricoClimatico() {
           </table>
         </div>
       </section>
-    </main>
+    </Layout>
   );
 }
 
