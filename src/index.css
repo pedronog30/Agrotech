@@ -278,8 +278,7 @@ textarea {
   gap: 28px;
 }
 
-.card h2,
-.titulo-secao {
+.card h2 {
   font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.4px;

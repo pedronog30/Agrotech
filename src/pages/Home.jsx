@@ -8,15 +8,15 @@ import Layout from '../components/Layout.jsx'
 function getClimaIconeInfo(descricao) {
   const d = descricao.toLowerCase()
 
-  if (d.includes('céu limpo') || d.includes('ceu limpo')) return { icone: 'fa-sun', cor: '#f5a623' }
-  if (d.includes('poucas nuvens')) return { icone: 'fa-cloud-sun', cor: '#f5a623' }
-  if (d.includes('nuvens dispersas') || d.includes('nublado')) return { icone: 'fa-cloud', cor: '#999' }
-  if (d.includes('chuva') || d.includes('garoa')) return { icone: 'fa-cloud-rain', cor: '#5b9bd5' }
-  if (d.includes('trovoada') || d.includes('tempestade')) return { icone: 'fa-cloud-bolt', cor: '#7b68ee' }
-  if (d.includes('neve')) return { icone: 'fa-snowflake', cor: '#add8e6' }
-  if (d.includes('neblina') || d.includes('névoa') || d.includes('bruma')) return { icone: 'fa-smog', cor: '#ccc' }
+  if (d.includes('céu limpo') || d.includes('ceu limpo')) return { icone: 'fa-sun' }
+  if (d.includes('poucas nuvens')) return { icone: 'fa-cloud-sun' }
+  if (d.includes('nuvens dispersas') || d.includes('nublado')) return { icone: 'fa-cloud' }
+  if (d.includes('chuva') || d.includes('garoa')) return { icone: 'fa-cloud-rain' }
+  if (d.includes('trovoada') || d.includes('tempestade')) return { icone: 'fa-cloud-bolt' }
+  if (d.includes('neve')) return { icone: 'fa-snowflake' }
+  if (d.includes('neblina') || d.includes('névoa') || d.includes('bruma')) return { icone: 'fa-smog' }
 
-  return { icone: 'fa-cloud-sun', cor: '#f5a623' }
+  return { icone: 'fa-cloud-sun' }
 }
 
 function calcularRecomendacaoPlantio(temp, umidade, chuvaValor) {
